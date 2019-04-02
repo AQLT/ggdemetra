@@ -3,10 +3,9 @@ StatSa <- ggproto("StatSa", Stat,
                   compute_group = function(data, scales,
                                            method = c("x13","tramoseats"), 
                                            frequency = 12,
-                                           component = c("sa", "t", "ycal"),
+                                           component = "sa",
                                            spec = NULL) {
                       method <- match.arg(method)
-                      component <- match.arg(component)
                       data_ts <- ts(data$y, start = data$x[1], frequency = frequency)
                       if (method == "x13") {
                           if (is.null(spec)) {
@@ -21,10 +20,11 @@ StatSa <- ggproto("StatSa", Stat,
                               sa <- RJDemetra::jtramoseats(data_ts, spec = spec)
                           }
                       }
-                      if(component == "y_cal"){
-                          component <- paste0("preprocessing.model.", component)
-                      }
                       component_ts <- RJDemetra::get_indicators(sa, component)[[1]]
+                      if (!is.ts(component_ts)) {
+                          warning(sprintf("The component %s isn't a time series!", component))
+                          return(NULL)
+                      }
                       data$y <- as.numeric(component_ts)
                       data
                   }
@@ -34,7 +34,7 @@ StatSa <- ggproto("StatSa", Stat,
 stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
                     position = "identity", na.rm = FALSE, show.legend = NA, 
                     inherit.aes = TRUE, method = c("x13","tramoseats"), frequency = 12,
-                    component = c("sa", "t", "ycal"),
+                    component = "sa",
                     spec = NULL,
                     ...) {
     ggplot2::layer(

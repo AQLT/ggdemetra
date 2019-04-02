@@ -12,7 +12,6 @@ Depends:
     ggrepel,
     RJDemetra
 SystemRequirements: Java SE 8 or higher
-Encoding: UTF-8
 License: EUPL
 URL: https://github.com/AQLT/ggdemetra
 BugReports: https://github.com/AQLT/ggdemetra/issues
