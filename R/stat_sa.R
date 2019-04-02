@@ -1,39 +1,40 @@
-library(ggplot2)
-library(ggrepel)
 StatSa <- ggproto("StatSa", Stat, 
                   required_aes = c("x", "y"),
                   compute_group = function(data, scales,
                                            method = c("x13","tramoseats"), 
                                            frequency = 12,
-                                           component = c("sa", "t"),
+                                           component = c("sa", "t", "ycal"),
                                            spec = NULL) {
                       method <- match.arg(method)
                       component <- match.arg(component)
                       data_ts <- ts(data$y, start = data$x[1], frequency = frequency)
                       if (method == "x13") {
                           if (is.null(spec)) {
-                              sa <- RJDemetra::x13(data_ts)
+                              sa <- RJDemetra::jx13(data_ts)
                           }else{
-                              sa <- RJDemetra::x13(data_ts, spec = spec)
+                              sa <- RJDemetra::jx13(data_ts, spec = spec)
                           }
                       }else{
                           if (is.null(spec)) {
-                              sa <- RJDemetra::tramoseats(data_ts)
+                              sa <- RJDemetra::jtramoseats(data_ts)
                           }else{
-                              sa <- RJDemetra::tramoseats(data_ts, spec = spec)
+                              sa <- RJDemetra::jtramoseats(data_ts, spec = spec)
                           }
                       }
-                      final_data <- as.data.frame.ts(sa$final$series[, c("sa", "t")])
-                      data$y <- final_data[, component]
-                      #data$sa <- final_data[, component]
-                      cbind(data, final_data)
+                      if(component == "y_cal"){
+                          component <- paste0("preprocessing.model.", component)
+                      }
+                      component_ts <- RJDemetra::get_indicators(sa, component)[[1]]
+                      data$y <- as.numeric(component_ts)
+                      data
                   }
 )
 
+#'@export
 stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
                     position = "identity", na.rm = FALSE, show.legend = NA, 
                     inherit.aes = TRUE, method = c("x13","tramoseats"), frequency = 12,
-                    component = c("sa", "t"),
+                    component = c("sa", "t", "ycal"),
                     spec = NULL,
                     ...) {
     ggplot2::layer(
@@ -44,86 +45,3 @@ stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
     )
 }
 
-
-   
-library(RJDemetra)
-myseries <- ipi_c_eu[, "FR"]
-myseries_data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-                            y = as.numeric(ipi_c_eu[, "FR"]))
-
-myseries_data2 <- rbind(data.frame(x = as.numeric(time(ipi_c_eu)),
-                                   y = as.numeric(ipi_c_eu[, "FR"]),
-                                   serie = "FR", stringsAsFactors = FALSE),
-                        data.frame(x = as.numeric(time(ipi_c_eu)),
-                                   y = as.numeric(ipi_c_eu[, "IT"]),
-                                   serie = "IT", stringsAsFactors = FALSE))
-
-p <- ggplot(myseries_data, aes(x, y)) + 
-    geom_line() + 
-    stat_sa(colour = "red", component = "sa", spec = "RSA0") 
-p
-data <- ggplot_build(p)$data[[2]]
-
-p <- ggplot(myseries_data2, aes(x, y, group = serie, color = serie)) + 
-    geom_line() + 
-    stat_sa(colour = "black",component = "sa", spec = "RSA0") 
-p
-
-library(ggrepel)
-stat_outliers <- function(mapping = NULL, data = NULL, geom = "line",
-                    position = "identity", na.rm = FALSE, show.legend = NA, 
-                    inherit.aes = TRUE, method = c("x13","tramoseats"), frequency = 12,
-                    spec = NULL,
-                    ...) {
-    
-    ggplot2::layer(
-        stat = StatOutlier, data = data, mapping = mapping, geom = GeomTextRepel, 
-        position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-        params = list(method = method, frequency = frequency,
-                      spec = spec, ...)
-    )
-}
-
-StatOutlier <- ggproto("StatOutlier", Stat, 
-                  required_aes = c("x", "y"),
-                  compute_group = function(data, scales,
-                                           method = c("x13","tramoseats"), 
-                                           frequency = 12,
-                                           spec = NULL) {
-                      method <- match.arg(method)
-                      data_ts <- ts(data$y, start = data$x[1], frequency = frequency)
-                      data <<- data
-                      if (method == "x13") {
-                          if (is.null(spec)) {
-                              sa <- RJDemetra::x13(data_ts)
-                          }else{
-                              sa <- RJDemetra::x13(data_ts, spec = spec)
-                          }
-                      }else{
-                          if (is.null(spec)) {
-                              sa <- RJDemetra::tramoseats(data_ts)
-                          }else{
-                              sa <- RJDemetra::tramoseats(data_ts, spec = spec)
-                          }
-                      }
-                      liste_outliers <- grep("(^LS )| (^AO )| (^TC )| (^SO )",
-                                             rownames(sa$regarima$regression.coefficients),
-                                             value = TRUE)
-                      date <- gsub("(^.* )|(\\()|(\\))", "", liste_outliers)
-                      date <- sapply(strsplit(date, "-"),function(x){
-                          x <- as.numeric(x)
-                          x[2] + (x[1] - 1)/frequency
-                      })
-                      data_final <- data.frame(x = date,
-                                               y = data$y[round(data$x,3) %in% round(date,3)],
-                                               outliers =  liste_outliers,
-                                               stringsAsFactors = FALSE
-                                               )
-                      data_final
-                  }
-)
-p <- ggplot(myseries_data, aes(x, y)) + 
-    geom_line() + 
-    stat_outliers(aes(label = stat(outliers)),colour = "red", spec = "RSA3",
-                  arrow = arrow(length = unit(0.02, "npc")), segment.size = 0.2) 
-p
