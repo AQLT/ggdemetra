@@ -29,14 +29,32 @@ StatSa <- ggproto("StatSa", Stat,
                       data
                   }
 )
-
+#'Seasonal adjustment time series
+#'
 #'@export
-stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
-                    position = "identity", na.rm = FALSE, show.legend = NA, 
-                    inherit.aes = TRUE, method = c("x13","tramoseats"), frequency = 12,
+geom_sa <- function(mapping = NULL, data = NULL, stat = "sa",
+                    position = "identity", ...,
+                    method = c("x13", "tramoseats"), frequency = 12,
                     component = "sa",
                     spec = NULL,
-                    ...) {
+                    show.legend = NA, 
+                    inherit.aes = TRUE
+) {
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLine, 
+                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+                   params = list(method = method, frequency = frequency, component = component,
+                                 spec = spec, ...))
+}
+#' @rdname geom_sa
+#' @name geom_sa
+#'@export
+stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
+                    position = "identity", ...,
+                    method = c("x13", "tramoseats"), frequency = 12,
+                    component = "sa",
+                    spec = NULL,
+                    show.legend = NA, 
+                    inherit.aes = TRUE) {
     ggplot2::layer(
         stat = StatSa, data = data, mapping = mapping, geom = geom, 
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
@@ -44,4 +62,3 @@ stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
                       spec = spec, ...)
     )
 }
-

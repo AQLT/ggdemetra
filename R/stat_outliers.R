@@ -1,3 +1,81 @@
+#'Seasonal adjustment time series
+#'
+#'@export
+geom_text_outliers <- function(mapping = NULL, data = NULL, stat = "outliers",
+                               position = "identity", ...,
+                               method = c("x13", "tramoseats"), frequency = 12,
+                               component = "sa",
+                               spec = NULL,
+                               coefficients = FALSE,
+                               digits = 1,
+                               show.legend = NA, 
+                               inherit.aes = TRUE
+) {
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomText, 
+                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+                   params = list(method = method, frequency = frequency,
+                                 spec = spec, coefficients = coefficients, digits = digits,
+                                 ...))
+}
+#' @rdname geom_text_outliers
+#' @name geom_text_outliers
+#' @export
+geom_label_outliers <- function(mapping = NULL, data = NULL, stat = "outliers",
+                                position = "identity", ...,
+                                method = c("x13", "tramoseats"), frequency = 12,
+                                component = "sa",
+                                spec = NULL,
+                                coefficients = FALSE,
+                                digits = 1,
+                                show.legend = NA, 
+                                inherit.aes = TRUE
+) {
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabel, 
+                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+                   params = list(method = method, frequency = frequency,
+                                 spec = spec, coefficients = coefficients, digits = digits,
+                                 ...))
+}
+#' @rdname geom_text_outliers
+#' @name geom_text_outliers
+#'@export
+geom_text_repel_outliers <- function(mapping = NULL, data = NULL, stat = "outliers",
+                                     position = "identity", ...,
+                                     method = c("x13", "tramoseats"), frequency = 12,
+                                     component = "sa",
+                                     spec = NULL,
+                                     coefficients = FALSE,
+                                     digits = 1,
+                                     show.legend = NA, 
+                                     inherit.aes = TRUE
+) {
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomTextRepel, 
+                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+                   params = list(method = method, frequency = frequency,
+                                 spec = spec, coefficients = coefficients, digits = digits,
+                                 ...))
+}
+#' @rdname geom_text_outliers
+#' @name geom_text_outliers
+#' @export
+geom_label_repel_outliers <- function(mapping = NULL, data = NULL, stat = "outliers",
+                                      position = "identity", ...,
+                                      method = c("x13", "tramoseats"), frequency = 12,
+                                      component = "sa",
+                                      spec = NULL,
+                                      coefficients = FALSE,
+                                      digits = 1,
+                                      show.legend = NA, 
+                                      inherit.aes = TRUE
+) {
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabelRepel, 
+                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+                   params = list(method = method, frequency = frequency,
+                                 spec = spec, coefficients = coefficients, digits = digits,
+                                 ...))
+}
+#' @rdname geom_text_outliers
+#' @name geom_text_outliers
 #' @export
 stat_outliers <- function(mapping = NULL, data = NULL, geom = "line",
                           position = "identity", na.rm = FALSE, show.legend = NA, 
