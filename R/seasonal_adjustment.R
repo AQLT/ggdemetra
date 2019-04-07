@@ -1,3 +1,4 @@
+#' @importFrom stats ts is.mts is.ts time
 seasonal_adjustment <- function(data,
                                 method = c("x13","tramoseats"),
                                 spec = NULL,
@@ -5,6 +6,27 @@ seasonal_adjustment <- function(data,
                                 message = TRUE){
     method <- match.arg(method)
     data <- data[order(data$x), ]
+    
+
+    data_ts <- dataframe2ts(data = data, frequency = frequency, message = message)
+    
+    if (method == "x13") {
+        if (is.null(spec)) {
+            sa <- RJDemetra::jx13(data_ts)
+        }else{
+            sa <- RJDemetra::jx13(data_ts, spec = spec)
+        }
+    }else{
+        if (is.null(spec)) {
+            sa <- RJDemetra::jtramoseats(data_ts)
+        }else{
+            sa <- RJDemetra::jtramoseats(data_ts, spec = spec)
+        }
+    }
+    data$sa_model <- list(sa)
+    list(data = data, sa = sa, dates = as.numeric(time(data_ts)), frequency = frequency)
+}
+dataframe2ts <- function(data, frequency = NULL, message = TRUE){
     dates <- data$x
     
     if (class(dates) == "Date") {
@@ -29,22 +51,15 @@ seasonal_adjustment <- function(data,
     }
     if (!frequency %in% c(2, 4, 6, 12))
         stop("Couldn't pick automatically the frequency: you must specify manually the argument 'frequency'")
-
-    data_ts <- ts(data$y, start = first_date, frequency = frequency)
     
-    if (method == "x13") {
-        if (is.null(spec)) {
-            sa <- RJDemetra::jx13(data_ts)
-        }else{
-            sa <- RJDemetra::jx13(data_ts, spec = spec)
-        }
+    ts(data$y, start = first_date, frequency = frequency)
+}
+ts2dataframe <- function(x){
+    if (is.ts(x) & !is.mts(x)) {
+        data.frame(x = as.numeric(time(x)),
+                   y = as.numeric(x))
     }else{
-        if (is.null(spec)) {
-            sa <- RJDemetra::jtramoseats(data_ts)
-        }else{
-            sa <- RJDemetra::jtramoseats(data_ts, spec = spec)
-        }
+        NULL
     }
-    
-    list(data = data, sa = sa, dates = dates, frequency = frequency)
+   
 }

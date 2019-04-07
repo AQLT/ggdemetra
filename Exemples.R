@@ -2,7 +2,6 @@ library(RJDemetra)
 library(ggrepel)
 library(ggplot2)
 library(ggrepel)
-myseries <- ipi_c_eu[, "FR"]
 myseries_data <- data.frame(x = as.numeric(time(ipi_c_eu)),
                             y = as.numeric(ipi_c_eu[, "FR"]))
 
@@ -16,8 +15,15 @@ myseries_data2 <- rbind(data.frame(x = as.numeric(time(ipi_c_eu)),
 p <- ggplot(myseries_data, aes(x, y)) + 
     geom_point() + 
     geom_sa(colour = "red", component = "sa", spec = "RSA0") 
-p
+p + geom_diagnostics(xmin = 2003, xmax =  2010,
+                     ymin = 60, ymax = 70,
+                     table_theme = ttheme_default(base_size = 10),
+                     diagnostics =  c("diagnostics.td-res-all", "diagnostics.qs.on.i"))
+diagnostics <- c(toto = "diagnostics.td-res-all", "diagnostics.qs.on.i",
+                 "diagnostics.seas-res-periodogram","diagnostics.msr-global",
+                 "decomposition.tlen", "decomposition.slen", "mode")
 data <- ggplot_build(p)$data[[1]]
+t <- data$sa_model
 
 p <- ggplot(myseries_data2, aes(x, y, group = serie, color = serie)) + 
     geom_line() + 

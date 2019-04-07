@@ -35,7 +35,13 @@ StatArima <- ggproto("StatArima", Stat,
 )
 #' ARIMA model
 #' 
-#' \code{geom_text_arima()} adds the ARIMA models directly to the plot. \code{geom_label_arima()} draws a rectangle behind the ARIMA model, making it easier to read.
+#' \code{geom_text_arima()} adds directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_arima()} draws a rectangle behind the ARIMA model, making it easier to read.
+#' 
+#' @inheritParams geom_sa
+#' @param x_arima,y_arima position of the text of the ARIMA model. By default, the first position of the `data` is used.
+#' 
+#' @importFrom ggplot2 GeomText GeomLabel
+#' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @export
 geom_text_arima <- function(mapping = NULL, data = NULL, stat = "arima",
                             position = "identity", ...,

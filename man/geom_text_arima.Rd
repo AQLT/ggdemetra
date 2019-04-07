@@ -15,6 +15,46 @@ geom_label_arima(mapping = NULL, data = NULL, stat = "arima",
   spec = NULL, frequency = NULL, message = TRUE, x_arima = NULL,
   y_arima = NULL, show.legend = NA, inherit.aes = TRUE)
 }
+\arguments{
+\item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()} or
+\link[ggplot2:aes_]{aes_()}. If specified and \code{inherit.aes = TRUE} (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply \code{mapping} if there is no plot mapping.}
+
+\item{data}{A \code{data.frame} that contains the data used for the seasonal adjustment. By default,}
+
+\item{stat}{The statistical transformation to use on the data for this
+layer, as a string.}
+
+\item{position}{Position adjustment, either as a string, or the result of
+a call to a position adjustment function.}
+
+\item{...}{Other arguments passed on to \code{\link[=layer]{layer()}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{colour = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
+
+\item{method}{the method to use for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
+
+\item{spec}{the specification to use for the seasonal adjustment.
+See \link[RJDemetra:x13]{x13()} or \link[RJDemetra:tramoseats]{tramoseats()}.}
+
+\item{frequency}{the frequency of the time-series. By default (\code{frequency = NULL}),
+the frequency is compute automatically.}
+
+\item{x_arima, y_arima}{position of the text of the ARIMA model. By default, the first position of the \code{data} is used.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped.
+\code{FALSE} never includes, and \code{TRUE} always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.}
+
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
+rather than combining with them.}
+
+\item{message}{a \code{boolean} indicating if a message is printed with the frequency used.}
+}
 \description{
-\code{geom_text_arima()} adds the ARIMA models directly to the plot. \code{geom_label_arima()} draws a rectangle behind the ARIMA model, making it easier to read.
+\code{geom_text_arima()} adds directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_arima()} draws a rectangle behind the ARIMA model, making it easier to read.
 }

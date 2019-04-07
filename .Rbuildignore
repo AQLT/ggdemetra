@@ -1,4 +1,12 @@
+^docs$
+^_pkgdown\.yml$
 ^.*\.Rproj$
-^.*\.R$
 ^\.Rproj\.user$
+^README\.Rmd$
+^README-.*\.png$
+.travis.yml
+^pkgdown$
+^doc$
+cran-comments.md
 TODO.R
+Exemples.R
