@@ -1,4 +1,6 @@
-#' Diagnostics
+#' Table of diagnostics
+#' 
+#' Adds a table of diagnostics to the plot
 #'
 #' @inheritParams geom_sa
 #' @param diagnostics vector of character containing the name of the diagnostics to plot.
@@ -9,7 +11,7 @@
 #'   location of raster.
 #' @param ymin,ymax y location (in data coordinates) giving vertical
 #'   location of raster.
-#' @param table_theme list of theme parameters for the table of diagnostics.
+#' @param table_theme list of theme parameters for the table of diagnostics (see [ttheme_default()][gridExtra::ttheme_default()]).
 #' 
 #' @importFrom gridExtra tableGrob ttheme_default
 #' @export
@@ -112,8 +114,8 @@ StatDiagnostics <- ggproto("StatDiagnostics", Stat,
                                diag_names[names_supplied] <- names(diag_names)[names_supplied]
                            }
                            diag_table <- data.frame(Diagnostic =
-                                                               names(diag_table),
-                                                           Value = diag_table)
+                                                        diag_names,
+                                                    Value = diag_table)
                            diag_table
                        }
 )

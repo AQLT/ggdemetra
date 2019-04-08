@@ -72,7 +72,7 @@ geom_label_arima <- function(mapping = NULL, data = NULL, stat = "arima",
                              show.legend = NA, 
                              inherit.aes = TRUE
 ) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomText, 
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabel, 
                    position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,

@@ -45,18 +45,17 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Other arguments passed on to \code{\link[=layer]{layer()}}. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
+\item{...}{Other arguments passed on to \link[ggplot2:layer]{layer()}. They may be parameters of
+\link[ggplot2:geom_text]{geom_text()}, \link[ggplot2:geom_label]{geom_label()},
+\link[ggrepel:geom_text_repel]{geom_text_repel()} or \link[ggrepel:geom_label_repel]{geom_label_repel()}.}
 
-\item{method}{the method to use for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
+\item{method}{the method used for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
 
-\item{spec}{the specification to use for the seasonal adjustment.
+\item{spec}{the specification used for the seasonal adjustment.
 See \link[RJDemetra:x13]{x13()} or \link[RJDemetra:tramoseats]{tramoseats()}.}
 
-\item{frequency}{the frequency of the time-series. By default (\code{frequency = NULL}),
-the frequency is compute automatically.}
+\item{frequency}{the frequency of the time series. By default (\code{frequency = NULL}),
+the frequency is computed automatically.}
 
 \item{message}{a \code{boolean} indicating if a message is printed with the frequency used.}
 
@@ -69,7 +68,7 @@ By default (\code{first_date = NULL}) the outliers are plotted until the
 end of the time series.}
 
 \item{coefficients}{boolean indicating if the estimates coefficients are printed.
-By default \code{coefficients = FALSE}}
+By default \code{coefficients = FALSE}.}
 
 \item{digits}{integer indicating the number of decimal places to be used for numeric diagnostics. By default \code{digits = 1}.}
 
@@ -83,5 +82,5 @@ display.}
 rather than combining with them.}
 }
 \description{
-\code{geom_text_outliers()} adds directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_outliers()} draws a rectangle behind the ARIMA model, making it easier to read. In \code{geom_text_repel_outliers()} and \code{geom_label_repel_outliers()}, text labels repel away from each other and away from the data points (see \link[ggrepel:geom_label_repel]{geom_label_repel()}).
+\code{geom_text_outliers()} adds directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_outliers()} draws a rectangle behind the names of the outliers, making them easier to read. In \code{geom_text_repel_outliers()} and \code{geom_label_repel_outliers()}, text labels repel away from each other and away from the data points (see \link[ggrepel:geom_label_repel]{geom_label_repel()}).
 }

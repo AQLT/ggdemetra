@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_diagnostics.R
 \name{geom_diagnostics}
 \alias{geom_diagnostics}
-\title{Seasonal adjustment time series}
+\title{Table of diagnostics}
 \usage{
 geom_diagnostics(mapping = NULL, data = NULL, position = "identity",
   ..., method = c("x13", "tramoseats"), spec = NULL,
@@ -21,18 +21,17 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Other arguments passed on to \code{\link[=layer]{layer()}}. These are
+\item{...}{Other arguments passed on to \link[ggplot2:layer]{layer()}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
+\code{colour = "red"} or \code{size = 3}.}
 
-\item{method}{the method to use for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
+\item{method}{the method used for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
 
-\item{spec}{the specification to use for the seasonal adjustment.
+\item{spec}{the specification used for the seasonal adjustment.
 See \link[RJDemetra:x13]{x13()} or \link[RJDemetra:tramoseats]{tramoseats()}.}
 
-\item{frequency}{the frequency of the time-series. By default (\code{frequency = NULL}),
-the frequency is compute automatically.}
+\item{frequency}{the frequency of the time series. By default (\code{frequency = NULL}),
+the frequency is computed automatically.}
 
 \item{message}{a \code{boolean} indicating if a message is printed with the frequency used.}
 
@@ -48,11 +47,11 @@ location of raster.}
 \item{ymin, ymax}{y location (in data coordinates) giving vertical
 location of raster.}
 
-\item{table_theme}{list of theme parameters for the table of diagnostics.}
+\item{table_theme}{list of theme parameters for the table of diagnostics (see \link[gridExtra:ttheme_default]{ttheme_default()}).}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them.}
 }
 \description{
-Seasonal adjustment time series
+Adds a table of diagnostics to the plot
 }

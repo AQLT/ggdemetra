@@ -1,3 +1,13 @@
+devtools::build_vignettes()
+library(pkgdown)
+build_favicon(pkg = ".")
+usethis::use_github_links(overwrite = TRUE)
+template_reference()
+template_articles()
+pkgdown::template_navbar()
+pkgdown::build_site()
+pkgdown::build_home()
+
 library(RJDemetra)
 library(ggrepel)
 library(ggplot2)

@@ -23,8 +23,9 @@ seasonal_adjustment <- function(data,
             sa <- RJDemetra::jtramoseats(data_ts, spec = spec)
         }
     }
-    data$sa_model <- list(sa)
-    list(data = data, sa = sa, dates = as.numeric(time(data_ts)), frequency = frequency)
+    # data$sa_model <- list(sa)
+    list(data = data, sa = sa, dates = as.numeric(time(data_ts)),
+         frequency = frequency(data_ts))
 }
 dataframe2ts <- function(data, frequency = NULL, message = TRUE){
     dates <- data$x

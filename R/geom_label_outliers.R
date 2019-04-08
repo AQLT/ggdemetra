@@ -69,9 +69,12 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 
 #' Outliers texts
 #'
-#' \code{geom_text_outliers()} adds directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_outliers()} draws a rectangle behind the ARIMA model, making it easier to read. In \code{geom_text_repel_outliers()} and \code{geom_label_repel_outliers()}, text labels repel away from each other and away from the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
+#' \code{geom_text_outliers()} adds directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_outliers()} draws a rectangle behind the names of the outliers, making them easier to read. In \code{geom_text_repel_outliers()} and \code{geom_label_repel_outliers()}, text labels repel away from each other and away from the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
 #'
 #' @inheritParams geom_sa
+#' @param ... Other arguments passed on to [layer()][ggplot2::layer]. They may be parameters of 
+#'    [geom_text()][ggplot2::geom_text], [geom_label()][ggplot2::geom_label], 
+#'    [geom_text_repel()][ggrepel::geom_text_repel] or [geom_label_repel()][ggrepel::geom_label_repel].
 #' @param first_date A numeric specifying the first date from which the outliers are plotted.
 #'    By default (`first_date = NULL`) the outliers are plotted from the 
 #'    beginning of the time series.
@@ -79,7 +82,7 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 #'    By default (`first_date = NULL`) the outliers are plotted until the 
 #'    end of the time series.
 #' @param coefficients boolean indicating if the estimates coefficients are printed. 
-#'    By default `coefficients = FALSE`
+#'    By default `coefficients = FALSE`.
 #' @param digits integer indicating the number of decimal places to be used for numeric diagnostics. By default `digits = 1`. 
 #'
 #' @export

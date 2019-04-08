@@ -49,15 +49,14 @@ StatSa <- ggproto("StatSa", Stat,
 #'    layer, as a string.
 #' @param position Position adjustment, either as a string, or the result of
 #'  a call to a position adjustment function.
-#' @param ... Other arguments passed on to [layer()]. These are
+#' @param ... Other arguments passed on to [layer()][ggplot2::layer]. These are
 #'   often aesthetics, used to set an aesthetic to a fixed value, like
-#'   `colour = "red"` or `size = 3`. They may also be parameters
-#'   to the paired geom/stat.
-#' @param method the method to use for the seasonal adjustment. `"x13"` (by default) for the X-13ARIMA method and `"tramoseats"` for TRAMO-SEATS.
-#' @param spec the specification to use for the seasonal adjustment. 
+#'   `colour = "red"` or `size = 3`.
+#' @param method the method used for the seasonal adjustment. `"x13"` (by default) for the X-13ARIMA method and `"tramoseats"` for TRAMO-SEATS.
+#' @param spec the specification used for the seasonal adjustment. 
 #'    See [x13()][RJDemetra::x13] or [tramoseats()][RJDemetra::tramoseats].
-#' @param frequency the frequency of the time-series. By default (`frequency = NULL`),
-#'    the frequency is compute automatically.
+#' @param frequency the frequency of the time series. By default (`frequency = NULL`),
+#'    the frequency is computed automatically.
 #' @param message a `boolean` indicating if a message is printed with the frequency used.
 #' @param component a `character` equals to the component to plot. The result must be a time series. 
 #'    See [user_defined_variables()][RJDemetra::user_defined_variables] for the available
