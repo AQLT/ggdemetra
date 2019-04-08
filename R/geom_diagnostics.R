@@ -1,4 +1,4 @@
-#' Seasonal adjustment time series
+#' Diagnostics
 #'
 #' @inheritParams geom_sa
 #' @param diagnostics vector of character containing the name of the diagnostics to plot.
