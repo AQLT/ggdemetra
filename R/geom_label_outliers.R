@@ -69,12 +69,20 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 
 #' Outliers texts
 #'
-#' \code{geom_text_outliers()} adds directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_outliers()} draws a rectangle behind the names of the outliers, making them easier to read. In \code{geom_text_repel_outliers()} and \code{geom_label_repel_outliers()}, text labels repel away from each other and away from the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
+#' Fuction to add directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment.
 #'
 #' @inheritParams geom_sa
+#' @param geom character. The geometric to use to display the data: 
+#'    `GeomText` (`geom = "text"`, the default, see [geom_text()][ggplot2::geom_text]); 
+#'    `GeomLabel` (`geom = "label"`, see [geom_label()][ggplot2::geom_label]); 
+#'    `GeomTextRepel` (`geom = "text_repel"`, the default, see [geom_text_repel()][ggrepel::geom_text_repel]); 
+#'    `GeomLabelRepel` (`geom = "label_repel"`, the default, see [geom_label_repel()][ggrepel::geom_label_repel]).
+#'   
 #' @param ... Other arguments passed on to [layer()][ggplot2::layer]. They may be parameters of 
-#'    [geom_text()][ggplot2::geom_text], [geom_label()][ggplot2::geom_label], 
-#'    [geom_text_repel()][ggrepel::geom_text_repel] or [geom_label_repel()][ggrepel::geom_label_repel].
+#'    [geom_text()][ggplot2::geom_text] (if `geom = "text"`), 
+#'    [geom_label()][ggplot2::geom_label] (if `geom = "label"`), 
+#'    [geom_text_repel()][ggrepel::geom_text_repel] (if `geom = "text_repel"`) 
+#'    or [geom_label_repel()][ggrepel::geom_label_repel] (if `geom = "label_repel"`).
 #' @param first_date A numeric specifying the first date from which the outliers are plotted.
 #'    By default (`first_date = NULL`) the outliers are plotted from the 
 #'    beginning of the time series.
@@ -84,9 +92,14 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 #' @param coefficients boolean indicating if the estimates coefficients are printed. 
 #'    By default `coefficients = FALSE`.
 #' @param digits integer indicating the number of decimal places to be used for numeric diagnostics. By default `digits = 1`. 
+#' @details 
+#' With the parameter `geom = "text"`, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With `geom = "label"` a rectangle is drawn behind the names of the outliers, making them easier to read. The same with `geom = "text_repel"` or `geom = "label_repel"` but text labels are also repeled away from each other and away form the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
 #'
 #' @export
-geom_text_outlier <- function(mapping = NULL, data = NULL, stat = "outlier",
+geom_outlier <- function(mapping = NULL, data = NULL,
+                              stat = "outlier",
+                              geom = c("text", "label",
+                                       "text_repel", "label_repel"),
                               position = "identity", ...,
                               method = c("x13", "tramoseats"), 
                               spec = NULL,
@@ -99,7 +112,18 @@ geom_text_outlier <- function(mapping = NULL, data = NULL, stat = "outlier",
                               show.legend = NA, 
                               inherit.aes = TRUE
 ) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomText, 
+    geom <- match.arg(geom)
+    if (geom == "label_repel") {
+        geom <- GeomLabelRepel
+    } else if (geom == "text_repel") {
+        geom <- GeomTextRepel
+    } else if (geom == "label") {
+        geom <- GeomLabel
+    } else {
+        geom <- GeomText
+    }
+
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = geom, 
                    position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,

@@ -44,7 +44,7 @@ StatSa <- ggproto("StatSa", Stat,
 #'   default), it is combined with the default mapping at the top level of the
 #'   plot. You must supply `mapping` if there is no plot mapping.
 #' @param data A \code{data.frame} that contains the data used for the seasonal adjustment. By default,
-#' @param geom The geometric object to use display the data
+#' @param geom The geometric object to use to display the data
 #' @param stat The statistical transformation to use on the data for this
 #'    layer, as a string.
 #' @param position Position adjustment, either as a string, or the result of
