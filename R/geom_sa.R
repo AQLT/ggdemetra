@@ -68,6 +68,26 @@ StatSa <- ggproto("StatSa", Stat,
 #'   display.
 #' @param inherit.aes If `FALSE`, overrides the default aesthetics,
 #'   rather than combining with them.
+#'   
+#'   
+#' @examples 
+#' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
+#'                    y = as.numeric(ipi_c_eu[, "FR"]))
+#' p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#'     geom_line() +
+#'     labs(title = "Seasonal adjustment of the French industrial production index",
+#'          x = "time", y = NULL)
+#' 
+#' # To add the seasonal adjusted series:
+#' p_ipi_fr +
+#'     geom_sa(color = "red")
+#' 
+#' # To add the forecasts of the input data and the seasonal adjusted series:
+#' p_sa <- p_ipi_fr +
+#'     geom_sa(component = "y_f", linetype = 2, message = FALSE) + 
+#'     geom_sa(component = "sa", color = "red", message = FALSE) +
+#'     geom_sa(component = "sa_f", color = "red", linetype = 2, message = FALSE)
+#' p_sa 
 #' @importFrom ggplot2 GeomLine
 #' @export
 geom_sa <- function(mapping = NULL, data = NULL, stat = "sa",

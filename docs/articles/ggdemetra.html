@@ -74,7 +74,7 @@
       <h1>ggdemetra: extending ggplot2 to perform seasonal adjustment with RJDemetra</h1>
                         <h4 class="author">Alain Quartier-la-Tente</h4>
             
-            <h4 class="date">2019-04-08</h4>
+            <h4 class="date">2019-04-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/AQLT/ggdemetra/blob/master/vignettes/ggdemetra.Rmd"><code>vignettes/ggdemetra.Rmd</code></a></small>
       <div class="hidden name"><code>ggdemetra.Rmd</code></div>
@@ -90,9 +90,9 @@
 <code><a href="../reference/geom_sa.html">geom_sa()</a></code>: to add a time series compute during the seasonal adjustment (the trend, the seasonal adjusted time series, etc.).<br>
 </li>
 <li>
-<code>geom_text_outliers()</code>/<code>geom_label_outliers()</code>/<code>geom_text_repel_outliers()</code>/ <code>geom_label_repel_outliers()</code>: to add the outliers used in the pre-adjustment process of the seasonal adjustment.</li>
+<code>geom_outliers()</code>: to add the outliers used in the pre-adjustment process of the seasonal adjustment.</li>
 <li>
-<code><a href="../reference/geom_text_arima.html">geom_text_arima()</a></code>/<code><a href="../reference/geom_text_arima.html">geom_label_arima()</a></code>: to add the ARIMA model used in the pre-adjustment process of the seasonal adjustment.</li>
+<code><a href="../reference/geom_arima.html">geom_arima()</a></code>: to add the ARIMA model used in the pre-adjustment process of the seasonal adjustment.</li>
 <li>
 <code><a href="../reference/geom_diagnostics.html">geom_diagnostics()</a></code>: to add a table containing some diagnostics on the seasonal adjustment process.</li>
 </ul>
@@ -110,84 +110,83 @@
 <li>
 <code>frequency</code> is the frequency of the input time series. By default, the frequency is computed and a message is printed with the one chosen (use <code>message = FALSE</code> to suppress this message).</li>
 </ul>
-<p>In the following examples, the default seasonal adjustment specification will be used on the French industrial production index:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(RJDemetra)</a>
+<p>In the following examples, the default seasonal adjustment specification will be used on the French industrial production index. The seasonal adjustment will then be processed with X-13ARIMA with a pre-defined specification <code>"RSA5c</code> (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment), even if this is not the specification that should be used for this series. Indeed, in the industrial production th working day effect has more economic sense than the trading day effect and a gradual effect for easter does not make economic sense for the aggregated series. The specification that should be used with X-13ARIMA is <code>spec = RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")</code> but, to simplify the examples that follow, we will use the default one.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggdemetra)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; Le chargement a nécessité le package : ggplot2</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; Warning: le package 'ggplot2' a été compilé avec la version R 3.5.2</span></a>
-<a class="sourceLine" id="cb1-5" title="5">data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/time">time</a></span>(ipi_c_eu)),</a>
-<a class="sourceLine" id="cb1-6" title="6">                   <span class="dt">y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(ipi_c_eu[, <span class="st">"FR"</span>]))</a>
-<a class="sourceLine" id="cb1-7" title="7">p_ipi_fr &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Seasonal adjustment of the French industrial production index"</span>,</a>
-<a class="sourceLine" id="cb1-10" title="10">         <span class="dt">x =</span> <span class="st">"time"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb1-11" title="11">p_ipi_fr</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" title="3">data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/time">time</a></span>(ipi_c_eu)),</a>
+<a class="sourceLine" id="cb1-4" title="4">                   <span class="dt">y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(ipi_c_eu[, <span class="st">"FR"</span>]))</a>
+<a class="sourceLine" id="cb1-5" title="5">p_ipi_fr &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Seasonal adjustment of the French industrial production index"</span>,</a>
+<a class="sourceLine" id="cb1-8" title="8">         <span class="dt">x =</span> <span class="st">"time"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb1-9" title="9">p_ipi_fr</a></code></pre></div>
 <p><img src="ggdemetra_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 </div>
-<div id="add-the-result-of-the-seasonal-adjusment-with-geom_sa" class="section level1">
+<div id="add-the-result-of-the-seasonal-adjusment" class="section level1">
 <h1 class="hasAnchor">
-<a href="#add-the-result-of-the-seasonal-adjusment-with-geom_sa" class="anchor"></a>Add the result of the seasonal adjusment with <code><a href="../reference/geom_sa.html">geom_sa()</a></code>
-</h1>
+<a href="#add-the-result-of-the-seasonal-adjusment" class="anchor"></a>Add the result of the seasonal adjusment</h1>
 <p>By default <code><a href="../reference/geom_sa.html">geom_sa()</a></code> adds the seasonal adjusted time series:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">p_ipi_fr <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_sa.html">geom_sa</a></span>(<span class="dt">color =</span> <span class="st">"red"</span>)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; Frenquency used: 12</span></a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>To add other components of the seasonal adjustment, use the <code>component</code> parameter of <code><a href="../reference/geom_sa.html">geom_sa()</a></code> (see <code>?RJDemetra::user_defined_variables()</code> for the availables parameters). For example, to add the forecasts of the input data and of the seasonal adjusted series:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">p_sa &lt;-<span class="st"> </span>p_ipi_fr <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"y_f"</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="st">    </span><span class="kw"><a href="../reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa"</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">    </span><span class="kw"><a href="../reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa_f"</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb3-5" title="5">p_sa</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div id="add-the-outliers-to-the-plot" class="section level1">
 <h1 class="hasAnchor">
 <a href="#add-the-outliers-to-the-plot" class="anchor"></a>Add the outliers to the plot</h1>
-<p>There are four functions to add to the plot the names of the outliers used in the pre-adjustment process:</p>
+<p>There are four differents geometrics to add to the plot the names of the outliers used in the pre-adjustment process:</p>
 <ul>
 <li>
-<code>geom_text_outliers()</code> adds directly the names of the outliers and <code>geom_label_outliers()</code> draws a rectangle behind the names, making them easier to read.<br>
+<code>geom = "text"</code> (the default) adds directly the names of the outliers and <code>geom = "label"</code> draws a rectangle behind the names, making them easier to read.<br>
 </li>
 <li>
-<code>geom_text_repel_outliers()</code> and <code>geom_label_repel_outliers()</code> do the same but text labels repel away from each other and away from the data points (see <code><a href="https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel">?ggrepel::geom_label_repel</a></code>).</li>
+<code>geom = "text_repel"</code> and <code>geom = "label_repel"</code> do the same but text labels repel away from each other and away from the data points (see <code><a href="https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel">?ggrepel::geom_label_repel</a></code>).</li>
 </ul>
-<p>In our example, there are three outliers:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p_sa <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/geom_text_outlier.html">geom_label_outlier</a></span>(<span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p>In our example, there are 3 outliers:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p_sa <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/geom_outlier.html">geom_outlier</a></span>(<span class="dt">geom =</span> <span class="st">"label"</span>,</a>
+<a class="sourceLine" id="cb4-2" title="2">                    <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>They can be plotted in more readable way using the parameters of <code><a href="https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel">ggrepel::geom_label_repel</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_text_outlier.html">geom_label_repel_outlier</a></span>(<span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb5-3" title="3">                             <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb5-4" title="4">                             <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb5-5" title="5">                             <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
-<a class="sourceLine" id="cb5-6" title="6">                                           <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_outlier.html">geom_outlier</a></span>(<span class="dt">geom =</span> <span class="st">"label_repel"</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">                 <span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb5-4" title="4">                 <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb5-6" title="6">                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
+<a class="sourceLine" id="cb5-7" title="7">                               <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a></code></pre></div>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Use the parameters <code>first_date</code> and <code>last_date</code> to only have the outliers in a precise time interval. For example, to only plot the outliers from 2009 use <code>first_date = 2009</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_text_outlier.html">geom_label_repel_outlier</a></span>(<span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb6-3" title="3">                             <span class="dt">first_date =</span> <span class="dv">2009</span>,</a>
-<a class="sourceLine" id="cb6-4" title="4">                             <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb6-5" title="5">                             <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb6-6" title="6">                             <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
-<a class="sourceLine" id="cb6-7" title="7">                                           <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-</div>
-<div id="add-the-arima-model-with-geom_label_arima" class="section level1">
-<h1 class="hasAnchor">
-<a href="#add-the-arima-model-with-geom_label_arima" class="anchor"></a>Add the ARIMA model with <code><a href="../reference/geom_text_arima.html">geom_label_arima()</a></code>
-</h1>
-<p>The ARIMA model used pre-adjustment process can be added to the plot with <code><a href="../reference/geom_text_arima.html">geom_text_arima()</a></code> or <code><a href="../reference/geom_text_arima.html">geom_label_arima()</a></code> (that draws a rectangle behind the ARIMA model, making them easier to read):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_text_arima.html">geom_label_arima</a></span>(<span class="dt">x_arima =</span> <span class="op">-</span><span class="st"> </span><span class="ot">Inf</span>, <span class="dt">y_arima =</span> <span class="op">-</span><span class="ot">Inf</span>, </a>
-<a class="sourceLine" id="cb7-3" title="3">                     <span class="dt">vjust =</span> <span class="dv">-1</span>, <span class="dt">hjust =</span> <span class="fl">-0.1</span>,</a>
-<a class="sourceLine" id="cb7-4" title="4">                     <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_outlier.html">geom_outlier</a></span>(<span class="dt">geom =</span> <span class="st">"label_repel"</span>,</a>
+<a class="sourceLine" id="cb6-3" title="3">                 <span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb6-4" title="4">                 <span class="dt">first_date =</span> <span class="dv">2009</span>,</a>
+<a class="sourceLine" id="cb6-5" title="5">                 <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb6-6" title="6">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb6-7" title="7">                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
+<a class="sourceLine" id="cb6-8" title="8">                               <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a></code></pre></div>
 <p><img src="ggdemetra_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
-<div id="add-a-table-with-some-diagnostics-with-geom_diagnostics" class="section level1">
+<div id="add-the-arima-model" class="section level1">
 <h1 class="hasAnchor">
-<a href="#add-a-table-with-some-diagnostics-with-geom_diagnostics" class="anchor"></a>Add a table with some diagnostics with <code><a href="../reference/geom_diagnostics.html">geom_diagnostics()</a></code>
-</h1>
+<a href="#add-the-arima-model" class="anchor"></a>Add the ARIMA model</h1>
+<p>The ARIMA model used pre-adjustment process can be added to the plot with <code>geom_ arima()</code>. The parameter <code>geom = "label"</code> draws a rectangle behind the ARIMA model, making it easier to read:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_arima.html">geom_arima</a></span>(<span class="dt">geom =</span> <span class="st">"label"</span>,</a>
+<a class="sourceLine" id="cb7-3" title="3">               <span class="dt">x_arima =</span> <span class="op">-</span><span class="st"> </span><span class="ot">Inf</span>, <span class="dt">y_arima =</span> <span class="op">-</span><span class="ot">Inf</span>, </a>
+<a class="sourceLine" id="cb7-4" title="4">               <span class="dt">vjust =</span> <span class="dv">-1</span>, <span class="dt">hjust =</span> <span class="fl">-0.1</span>,</a>
+<a class="sourceLine" id="cb7-5" title="5">               <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+</div>
+<div id="add-a-table-with-some-diagnostics" class="section level1">
+<h1 class="hasAnchor">
+<a href="#add-a-table-with-some-diagnostics" class="anchor"></a>Add a table with some diagnostics</h1>
 <p>A table with some diagnostics on the seasonal adjustment process can be added with <code><a href="../reference/geom_diagnostics.html">geom_diagnostics()</a></code>. The desired diagnostics have to be added to the <code>diagnostics</code> parameter (see <code>?RJDemetra::user_defined_variables()</code> for the availables diagnostics). For example, to add the result of the X-11 combined test and the p-values of the residual seasonality qs and f tests:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"diagnostics.combined.all.summary"</span>, <span class="st">"diagnostics.qs"</span>, <span class="st">"diagnostics.ftest"</span>)</a>
 <a class="sourceLine" id="cb8-2" title="2">p_sa <span class="op">+</span><span class="st"> </span></a>
@@ -195,7 +194,7 @@
 <a class="sourceLine" id="cb8-4" title="4">                     <span class="dt">ymin =</span> <span class="dv">58</span>, <span class="dt">ymax =</span> <span class="dv">72</span>, <span class="dt">xmin =</span> <span class="dv">2010</span>,</a>
 <a class="sourceLine" id="cb8-5" title="5">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
 <a class="sourceLine" id="cb8-6" title="6">                     <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>To customize the names of the diagnostics in the plot, pass a named vector to the <code>diagnostics</code> parameter:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">`</span><span class="dt">Combined test</span><span class="st">`</span> =<span class="st"> "diagnostics.combined.all.summary"</span>,</a>
 <a class="sourceLine" id="cb9-2" title="2">                 <span class="st">`</span><span class="dt">Residual qs-test (p-value)</span><span class="st">`</span> =<span class="st"> "diagnostics.qs"</span>,</a>
@@ -205,7 +204,17 @@
 <a class="sourceLine" id="cb9-6" title="6">                     <span class="dt">ymin =</span> <span class="dv">58</span>, <span class="dt">ymax =</span> <span class="dv">72</span>, <span class="dt">xmin =</span> <span class="dv">2010</span>,</a>
 <a class="sourceLine" id="cb9-7" title="7">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
 <a class="sourceLine" id="cb9-8" title="8">                     <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="ggdemetra_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>To add the table below the plot, you can for example use <code><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">gridExtra::grid.arrange()</a></code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">p_diag &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">    </span><span class="kw"><a href="../reference/geom_diagnostics.html">geom_diagnostics</a></span>(<span class="dt">diagnostics =</span> diagnostics,</a>
+<a class="sourceLine" id="cb10-3" title="3">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb10-4" title="4">                     <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="st">    </span><span class="kw">theme_void</span>()</a>
+<a class="sourceLine" id="cb10-6" title="6">    </a>
+<a class="sourceLine" id="cb10-7" title="7">gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange</a></span>(p_sa, p_diag,</a>
+<a class="sourceLine" id="cb10-8" title="8">             <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">heights  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="ggdemetra_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>
   </div>
 
@@ -215,10 +224,10 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#seasonal-adjustment-specification">Seasonal adjustment specification</a></li>
-      <li><a href="#add-the-result-of-the-seasonal-adjusment-with-geom_sa">Add the result of the seasonal adjusment with <code><a href="--/reference/geom_sa-html">geom_sa()</a></code></a></li>
+      <li><a href="#add-the-result-of-the-seasonal-adjusment">Add the result of the seasonal adjusment</a></li>
       <li><a href="#add-the-outliers-to-the-plot">Add the outliers to the plot</a></li>
-      <li><a href="#add-the-arima-model-with-geom_label_arima">Add the ARIMA model with <code><a href="--/reference/geom_text_arima-html">geom_label_arima()</a></code></a></li>
-      <li><a href="#add-a-table-with-some-diagnostics-with-geom_diagnostics">Add a table with some diagnostics with <code><a href="--/reference/geom_diagnostics-html">geom_diagnostics()</a></code></a></li>
+      <li><a href="#add-the-arima-model">Add the ARIMA model</a></li>
+      <li><a href="#add-a-table-with-some-diagnostics">Add a table with some diagnostics</a></li>
       </ul>
 </div>
       </div>

@@ -12,6 +12,15 @@ library(RJDemetra)
 library(ggrepel)
 library(ggplot2)
 library(ggrepel)
+file <- "docs/index.html"
+index <- readLines(file)
+i_to_change <- grep("Mes%20Documents", index)
+index[i_to_change]
+index <- gsub("../../Mes%20Documents/ggdemetra/man","reference",
+              index,fixed = TRUE)
+index[i_to_change]
+writeLines(index, file)
+
 myseries_data <- data.frame(x = as.numeric(time(ipi_c_eu)),
                             y = as.numeric(ipi_c_eu[, "FR"]))
 

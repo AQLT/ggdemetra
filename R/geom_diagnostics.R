@@ -13,6 +13,46 @@
 #'   location of raster.
 #' @param table_theme list of theme parameters for the table of diagnostics (see [ttheme_default()][gridExtra::ttheme_default()]).
 #' 
+#' 
+#' @examples 
+#' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
+#'                    y = as.numeric(ipi_c_eu[, "FR"]))
+#' p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#'     geom_line() +
+#'     labs(title = "Seasonal adjustment of the French industrial production index",
+#'          x = "time", y = NULL)
+#' 
+#' # To add of diagnostics with result of the X-11 combined test and the p-values 
+#' # of the residual seasonality qs and f tests:
+#' diagnostics <- c("diagnostics.combined.all.summary", "diagnostics.qs", "diagnostics.ftest")
+#' p_ipi_fr + 
+#'     geom_diagnostics(diagnostics = diagnostics,
+#'                      ymin = 58, ymax = 72, xmin = 2010,
+#'                      table_theme = gridExtra::ttheme_default(base_size = 8),
+#'                      message = FALSE)
+#' 
+#' # To customize the names of the diagnostics in the plot:
+#'     
+#' diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
+#'                  `Residual qs-test (p-value)` = "diagnostics.qs",
+#'                  `Residual f-test (p-value)` = "diagnostics.ftest")
+#' p_ipi_fr + 
+#'     geom_diagnostics(diagnostics = diagnostics,
+#'                      ymin = 58, ymax = 72, xmin = 2010,
+#'                      table_theme = gridExtra::ttheme_default(base_size = 8),
+#'                      message = FALSE)
+#' 
+#' # To add the table below the plot: 
+#' 
+#' p_diag <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#'     geom_diagnostics(diagnostics = diagnostics,
+#'                      table_theme = gridExtra::ttheme_default(base_size = 8),
+#'                      message = FALSE) + 
+#'     theme_void()
+#' 
+#' gridExtra::grid.arrange(p_ipi_fr, p_diag,
+#'                         nrow = 2, heights  = c(4, 1))
+#' 
 #' @importFrom gridExtra tableGrob ttheme_default
 #' @export
 geom_diagnostics <- function(mapping = NULL, data = NULL,
@@ -37,6 +77,7 @@ geom_diagnostics <- function(mapping = NULL, data = NULL,
                                  table_theme = table_theme,
                                  ...))
 }
+# Code largely inspired by GeomCustomAnn of ggplot2
 GeomDiagnostics <- ggproto("GeomDiagnostics", Geom,
                          extra_params = "",
                          handle_na = function(data, params) {

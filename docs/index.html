@@ -86,6 +86,18 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>ggdemetra is an extension of <a href="https://github.com/tidyverse/ggplot2">ggplot2</a> to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with (RJDemetra)[<a href="https://github.com/jdemetra/rjdemetra" class="uri">https://github.com/jdemetra/rjdemetra</a>] that is an R interface to <a href="https://github.com/jdemetra/jdemetra-app">JDemetra+</a>, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
+<p>There are 4 main functionnalities in <code>ggdemetra</code> depending of what you want to add in the graphic:</p>
+<ul>
+<li>
+<code><a href="reference/geom_sa.html">geom_sa()</a></code>: to add a time series compute during the seasonal adjustment (the trend, the seasonal adjusted time series, etc.).<br>
+</li>
+<li>
+<code>geom_outliers()</code>: to add the outliers used in the pre-adjustment process of the seasonal adjustment.</li>
+<li>
+<code><a href="reference/geom_arima.html">geom_arima()</a></code>: to add the ARIMA model used in the pre-adjustment process of the seasonal adjustment.</li>
+<li>
+<code><a href="reference/geom_diagnostics.html">geom_diagnostics()</a></code>: to add a table containing some diagnostics on the seasonal adjustment process.</li>
+</ul>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -95,6 +107,58 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jdemetra/rjdemetra"</span>)</a>
 <a class="sourceLine" id="cb1-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"AQLT/ggdemetra"</span>)</a></code></pre></div>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>To add the seasonal adjusted series and the forecasts of the input data and of the seasonal adjusted series:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggdemetra)</a>
+<a class="sourceLine" id="cb2-3" title="3">data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/time">time</a></span>(ipi_c_eu)),</a>
+<a class="sourceLine" id="cb2-4" title="4">                   <span class="dt">y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(ipi_c_eu[, <span class="st">"FR"</span>]))</a>
+<a class="sourceLine" id="cb2-5" title="5">p_ipi_fr &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Seasonal adjustment of the French industrial production index"</span>,</a>
+<a class="sourceLine" id="cb2-8" title="8">         <span class="dt">x =</span> <span class="st">"time"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb2-9" title="9">p_sa &lt;-<span class="st"> </span>p_ipi_fr <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="st">    </span><span class="kw"><a href="reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"y_f"</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">message =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">    </span><span class="kw"><a href="reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa"</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">    </span><span class="kw"><a href="reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa_f"</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb2-13" title="13">p_sa</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>To add the outliers at the bottom of the plot with an arrow to the data point and the estimate coefficient:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_outlier.html">geom_outlier</a></span>(<span class="dt">geom =</span> <span class="st">"label_repel"</span>,</a>
+<a class="sourceLine" id="cb3-3" title="3">                 <span class="dt">coefficients =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-4" title="4">                 <span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb3-5" title="5">                 <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb3-6" title="6">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb3-7" title="7">                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
+<a class="sourceLine" id="cb3-8" title="8">                               <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; Frenquency used: 12</span></a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>To add the ARIMA model:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_arima.html">geom_arima</a></span>(<span class="dt">geom =</span> <span class="st">"label"</span>,</a>
+<a class="sourceLine" id="cb4-3" title="3">               <span class="dt">x_arima =</span> <span class="op">-</span><span class="st"> </span><span class="ot">Inf</span>, <span class="dt">y_arima =</span> <span class="op">-</span><span class="ot">Inf</span>, </a>
+<a class="sourceLine" id="cb4-4" title="4">               <span class="dt">vjust =</span> <span class="dv">-1</span>, <span class="dt">hjust =</span> <span class="fl">-0.1</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">               <span class="dt">message =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; Frenquency used: 12</span></a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>To add a table of diagnostics below the plot:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">`</span><span class="dt">Combined test</span><span class="st">`</span> =<span class="st"> "diagnostics.combined.all.summary"</span>,</a>
+<a class="sourceLine" id="cb5-2" title="2">                 <span class="st">`</span><span class="dt">Residual qs-test (p-value)</span><span class="st">`</span> =<span class="st"> "diagnostics.qs"</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">                 <span class="st">`</span><span class="dt">Residual f-test (p-value)</span><span class="st">`</span> =<span class="st"> "diagnostics.ftest"</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4">p_diag &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">    </span><span class="kw"><a href="reference/geom_diagnostics.html">geom_diagnostics</a></span>(<span class="dt">diagnostics =</span> diagnostics,</a>
+<a class="sourceLine" id="cb5-6" title="6">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb5-7" title="7">                     <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw">theme_void</span>()</a>
+<a class="sourceLine" id="cb5-9" title="9">    </a>
+<a class="sourceLine" id="cb5-10" title="10">gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange</a></span>(p_sa, p_diag,</a>
+<a class="sourceLine" id="cb5-11" title="11">             <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">heights  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; Frenquency used: 12</span></a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </div>

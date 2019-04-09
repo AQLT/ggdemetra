@@ -69,7 +69,7 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 
 #' Outliers texts
 #'
-#' Fuction to add directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment.
+#' Function to add directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment.
 #'
 #' @inheritParams geom_sa
 #' @param geom character. The geometric to use to display the data: 
@@ -93,8 +93,40 @@ StatOutlier <- ggproto("StatOutlier", Stat,
 #'    By default `coefficients = FALSE`.
 #' @param digits integer indicating the number of decimal places to be used for numeric diagnostics. By default `digits = 1`. 
 #' @details 
-#' With the parameter `geom = "text"`, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With `geom = "label"` a rectangle is drawn behind the names of the outliers, making them easier to read. The same with `geom = "text_repel"` or `geom = "label_repel"` but text labels are also repeled away from each other and away form the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
+#' With the parameter `geom = "text"`, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With `geom = "label"` a rectangle is drawn behind the names of the outliers, making them easier to read. The same with `geom = "text_repel"` or `geom = "label_repel"` but text labels are also repeled away from each other and away from the data points (see [geom_label_repel()][ggrepel::geom_label_repel]).
 #'
+#' @examples 
+#' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
+#'                    y = as.numeric(ipi_c_eu[, "FR"]))
+#' p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#'     geom_line() +
+#'     labs(title = "Seasonal adjustment of the French industrial production index",
+#'          x = "time", y = NULL)
+#'          
+#' # To add the outliers:
+#' p_ipi_fr + geom_outlier(geom = "label",
+#'                     message = FALSE)
+#' 
+#' 
+#' # To have a more readable plot with outliers names that repeled away from each other 
+#' # and from the data points:
+#' p_ipi_fr + 
+#'     geom_outlier(geom = "label_repel",
+#'                  message = FALSE,
+#'                  vjust = 4,
+#'                  ylim = c(NA, 65), force = 10,
+#'                  arrow = arrow(length = unit(0.03, "npc"),
+#'                                type = "closed", ends = "last"))
+#' 
+#' # To only plot the outliers from a specific date (2009):
+#' p_ipi_fr + 
+#'     geom_outlier(geom = "label_repel",
+#'                  message = FALSE,
+#'                  first_date = 2009,
+#'                  vjust = 4,
+#'                  ylim = c(NA, 65), force = 10,
+#'                  arrow = arrow(length = unit(0.03, "npc"),
+#'                                type = "closed", ends = "last"))
 #' @export
 geom_outlier <- function(mapping = NULL, data = NULL,
                               stat = "outlier",
@@ -131,92 +163,4 @@ geom_outlier <- function(mapping = NULL, data = NULL,
                                  coefficients = coefficients, digits = digits,
                                  ...))
 }
-#' @rdname geom_text_outlier
-#' @name geom_text_outlier
-#' @export
-geom_label_outlier <- function(mapping = NULL, data = NULL, stat = "outlier",
-                               position = "identity", ...,
-                               method = c("x13", "tramoseats"), 
-                               spec = NULL,
-                               frequency = NULL,
-                               message = TRUE,
-                               first_date = NULL,
-                               last_date = NULL,
-                               coefficients = FALSE,
-                               digits = 1,
-                               show.legend = NA, 
-                               inherit.aes = TRUE
-) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabel, 
-                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
-                   params = list(method = method, spec = spec, 
-                                 frequency = frequency, message = message,
-                                 first_date = first_date, last_date = last_date,
-                                 coefficients = coefficients, digits = digits,
-                                 ...))
-}
-#' @rdname geom_text_outlier
-#' @name geom_text_outlier
-#' @export
-geom_text_repel_outlier <- function(mapping = NULL, data = NULL, stat = "outlier",
-                                    position = "identity", ...,
-                                    method = c("x13", "tramoseats"), 
-                                    spec = NULL,
-                                    frequency = NULL,
-                                    message = TRUE,
-                                    first_date = NULL,
-                                    last_date = NULL,
-                                    coefficients = FALSE,
-                                    digits = 1,
-                                    show.legend = NA, 
-                                    inherit.aes = TRUE
-) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomTextRepel, 
-                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
-                   params = list(method = method, spec = spec, 
-                                 frequency = frequency, message = message,
-                                 first_date = first_date, last_date = last_date,
-                                 coefficients = coefficients, digits = digits,
-                                 ...))
-}
-#' @rdname geom_text_outlier
-#' @name geom_text_outlier
-#' @export
-geom_label_repel_outlier <- function(mapping = NULL, data = NULL, stat = "outlier",
-                                     position = "identity", ...,
-                                     method = c("x13", "tramoseats"), 
-                                     spec = NULL,
-                                     frequency = NULL,
-                                     message = TRUE,
-                                     first_date = NULL,
-                                     last_date = NULL,
-                                     coefficients = FALSE,
-                                     digits = 1,
-                                     show.legend = NA, 
-                                     inherit.aes = TRUE
-) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabelRepel, 
-                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
-                   params = list(method = method, spec = spec, 
-                                 frequency = frequency, message = message,
-                                 first_date = first_date, last_date = last_date,
-                                 coefficients = coefficients, digits = digits,
-                                 ...))
-}
 
-# stat_outlier <- function(mapping = NULL, data = NULL, geom = "line",
-#                           position = "identity", na.rm = FALSE, show.legend = NA, 
-#                           inherit.aes = TRUE, method = c("x13","tramoseats"), frequency = 12,
-#                           spec = NULL,
-#                           coefficients = FALSE,
-#                           digits = 1,
-#                           ...) {
-#     
-#     ggplot2::layer(
-#         stat = StatOutlier, data = data, mapping = mapping, geom = GeomLabelRepel, 
-#         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-#         params = list(method = method, frequency = frequency,
-#                       spec = spec, coefficients = coefficients, digits = digits,
-#                       ...)
-#     )
-# }

@@ -35,47 +35,57 @@ StatArima <- ggproto("StatArima", Stat,
 )
 #' ARIMA model
 #' 
-#' \code{geom_text_arima()} adds directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment. \code{geom_label_arima()} draws a rectangle behind the ARIMA model, making it easier to read.
+#' Function to add directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment.
 #' 
 #' @inheritParams geom_sa
+#' @param geom character. The geometric to use to display the data: 
+#'    `GeomText` (`geom = "text"`, the default, see [geom_text()][ggplot2::geom_text]) or 
+#'    `GeomLabel` (`geom = "label"`, see [geom_label()][ggplot2::geom_label]).
+
 #' @param x_arima,y_arima position of the text of the ARIMA model. By default, the first position of the `data` is used.
 #' 
+#' @details 
+#' With the parameter `geom = "text"`, the ARIMA model used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With `geom = "label"` a rectangle is drawn behind the ARIMA model, making it easier to read.
+#'
+#' @examples 
+#' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
+#'                    y = as.numeric(ipi_c_eu[, "FR"]))
+#' p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#'     geom_line() +
+#'     labs(title = "Seasonal adjustment of the French industrial production index",
+#'          x = "time", y = NULL)
+#'          
+#' # To add the ARIMA model
+#' p_ipi_fr + 
+#'     geom_arima(geom = "label",
+#'                x_arima = - Inf, y_arima = -Inf, 
+#'                vjust = -1, hjust = -0.1,
+#'                message = FALSE)          
 #' @importFrom ggplot2 GeomText GeomLabel
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @export
-geom_text_arima <- function(mapping = NULL, data = NULL, stat = "arima",
-                            position = "identity", ...,
-                            method = c("x13", "tramoseats"), 
-                            spec = NULL,
-                            frequency = NULL,
-                            x_arima = NULL, y_arima = NULL,
-                            show.legend = NA, 
-                            inherit.aes = TRUE
+geom_arima <- function(mapping = NULL, data = NULL, stat = "arima",
+                       geom = c("text", "label"),
+                       position = "identity", ...,
+                       method = c("x13", "tramoseats"), 
+                       spec = NULL,
+                       frequency = NULL,
+                       message = TRUE,
+                       x_arima = NULL, y_arima = NULL,
+                       show.legend = NA, 
+                       inherit.aes = TRUE
 ) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomText, 
+    geom <- match.arg(geom)
+    if (geom == "text") {
+        geom <- GeomText
+    } else {
+        geom <- GeomLabel
+    }
+    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = geom, 
                    position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,
                                  x_arima = x_arima, y_arima = y_arima,
                                  ...))
 }
-#' @rdname geom_text_arima
-#' @name geom_text_arima
-#' @export
-geom_label_arima <- function(mapping = NULL, data = NULL, stat = "arima",
-                             position = "identity", ...,
-                             method = c("x13", "tramoseats"), 
-                             spec = NULL,
-                             frequency = NULL,
-                             message = TRUE,
-                             x_arima = NULL, y_arima = NULL,
-                             show.legend = NA, 
-                             inherit.aes = TRUE
-) {
-    ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomLabel, 
-                   position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
-                   params = list(method = method, spec = spec, 
-                                 frequency = frequency, message = message,
-                                 x_arima = x_arima, y_arima = y_arima,
-                                 ...))
-}
+

@@ -56,8 +56,27 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them.}
 
-\item{geom}{The geometric object to use display the data}
+\item{geom}{The geometric object to use to display the data}
 }
 \description{
 Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. \code{geom_sa()} and \code{stat_sa()} are  aliases: they both use the same arguments. Use \code{stat_sa()} if you want to display the results with a non-standard geom.
+}
+\examples{
+data <- data.frame(x = as.numeric(time(ipi_c_eu)),
+                   y = as.numeric(ipi_c_eu[, "FR"]))
+p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+    geom_line() +
+    labs(title = "Seasonal adjustment of the French industrial production index",
+         x = "time", y = NULL)
+
+# To add the seasonal adjusted series:
+p_ipi_fr +
+    geom_sa(color = "red")
+
+# To add the forecasts of the input data and the seasonal adjusted series:
+p_sa <- p_ipi_fr +
+    geom_sa(component = "y_f", linetype = 2, message = FALSE) + 
+    geom_sa(component = "sa", color = "red", message = FALSE) +
+    geom_sa(component = "sa_f", color = "red", linetype = 2, message = FALSE)
+p_sa 
 }

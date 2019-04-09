@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Seasonal adjustment time series — geom_sa • ggdemetra</title>
+<title>ARIMA model — geom_arima • ggdemetra</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Seasonal adjustment time series — geom_sa" />
+<meta property="og:title" content="ARIMA model — geom_arima" />
 
-<meta property="og:description" content="Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. geom_sa() and stat_sa() are  aliases: they both use the same arguments. Use stat_sa() if you want to display the results with a non-standard geom." />
+<meta property="og:description" content="Function to add directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,26 +105,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Seasonal adjustment time series</h1>
-    <small class="dont-index">Source: <a href='https://github.com/AQLT/ggdemetra/blob/master/R/geom_sa.R'><code>R/geom_sa.R</code></a></small>
-    <div class="hidden name"><code>geom_sa.Rd</code></div>
+    <h1>ARIMA model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/AQLT/ggdemetra/blob/master/R/geom_arima.R'><code>R/geom_arima.R</code></a></small>
+    <div class="hidden name"><code>geom_arima.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. <code>geom_sa()</code> and <code>stat_sa()</code> are  aliases: they both use the same arguments. Use <code>stat_sa()</code> if you want to display the results with a non-standard geom.</p>
+    <p>Function to add directly to the plot the ARIMA model used in the pre-adjustment process of the seasonal adjustment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>geom_sa</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"sa"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"x13"</span>, <span class='st'>"tramoseats"</span>),
-  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"sa"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>stat_sa</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"x13"</span>, <span class='st'>"tramoseats"</span>),
-  <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"sa"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>geom_arima</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"arima"</span>,
+  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"text"</span>, <span class='st'>"label"</span>), <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"x13"</span>, <span class='st'>"tramoseats"</span>), <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>frequency</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>x_arima</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y_arima</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,6 +140,12 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <th>stat</th>
       <td><p>The statistical transformation to use on the data for this
 layer, as a string.</p></td>
+    </tr>
+    <tr>
+      <th>geom</th>
+      <td><p>character. The geometric to use to display the data:
+<code>GeomText</code> (<code>geom = "text"</code>, the default, see <a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text()</a>) or
+<code>GeomLabel</code> (<code>geom = "label"</code>, see <a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_label()</a>).</p></td>
     </tr>
     <tr>
       <th>position</th>
@@ -175,10 +177,8 @@ the frequency is computed automatically.</p></td>
       <td><p>a <code>boolean</code> indicating if a message is printed with the frequency used.</p></td>
     </tr>
     <tr>
-      <th>component</th>
-      <td><p>a <code>character</code> equals to the component to plot. The result must be a time series.
-See <a href='https://www.rdocumentation.org/packages/RJDemetra/topics/user_defined_variables'>user_defined_variables()</a> for the available
-parameters. By default (<code>component = 'sa'</code>) the seasonal adjusted component is plotted.</p></td>
+      <th>x_arima, y_arima</th>
+      <td><p>position of the text of the ARIMA model. By default, the first position of the <code>data</code> is used.</p></td>
     </tr>
     <tr>
       <th>show.legend</th>
@@ -193,11 +193,11 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them.</p></td>
     </tr>
-    <tr>
-      <th>geom</th>
-      <td><p>The geometric object to use to display the data</p></td>
-    </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>With the parameter <code>geom = "text"</code>, the ARIMA model used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With <code>geom = "label"</code> a rectangle is drawn behind the ARIMA model, making it easier to read.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -208,21 +208,20 @@ rather than combining with them.</p></td>
     <span class='fu'>labs</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Seasonal adjustment of the French industrial production index"</span>,
          <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='co'># To add the seasonal adjusted series:</span>
+<span class='co'># To add the ARIMA model</span>
 <span class='no'>p_ipi_fr</span> +
-    <span class='fu'>geom_sa</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='output co'>#&gt; <span class='message'>Frenquency used: 12</span></div><div class='img'><img src='geom_sa-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># To add the forecasts of the input data and the seasonal adjusted series:</span>
-<span class='no'>p_sa</span> <span class='kw'>&lt;-</span> <span class='no'>p_ipi_fr</span> +
-    <span class='fu'>geom_sa</span>(<span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"y_f"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-    <span class='fu'>geom_sa</span>(<span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"sa"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-    <span class='fu'>geom_sa</span>(<span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"sa_f"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>p_sa</span></div><div class='img'><img src='geom_sa-2.png' alt='' width='700' height='433' /></div></pre>
+    <span class='fu'>geom_arima</span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"label"</span>,
+               <span class='kw'>x_arima</span> <span class='kw'>=</span> - <span class='fl'>Inf</span>, <span class='kw'>y_arima</span> <span class='kw'>=</span> -<span class='fl'>Inf</span>,
+               <span class='kw'>vjust</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> -<span class='fl'>0.1</span>,
+               <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='geom_arima-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
