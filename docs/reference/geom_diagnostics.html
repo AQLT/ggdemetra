@@ -200,15 +200,16 @@ rather than combining with them.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/time'>time</a></span>(<span class='no'>ipi_c_eu</span>)),
                    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]))
-<span class='no'>p_ipi_fr</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
+<span class='no'>p_sa_ipi_fr</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
     <span class='fu'>geom_line</span>() +
     <span class='fu'>labs</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Seasonal adjustment of the French industrial production index"</span>,
-         <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+         <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
+    <span class='fu'><a href='geom_sa.html'>geom_sa</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># To add of diagnostics with result of the X-11 combined test and the p-values </span>
 <span class='co'># of the residual seasonality qs and f tests:</span>
 <span class='no'>diagnostics</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"diagnostics.combined.all.summary"</span>, <span class='st'>"diagnostics.qs"</span>, <span class='st'>"diagnostics.ftest"</span>)
-<span class='no'>p_ipi_fr</span> +
+<span class='no'>p_sa_ipi_fr</span> +
     <span class='fu'>geom_diagnostics</span>(<span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='no'>diagnostics</span>,
                      <span class='kw'>ymin</span> <span class='kw'>=</span> <span class='fl'>58</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='fl'>72</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='fl'>2010</span>,
                      <span class='kw'>table_theme</span> <span class='kw'>=</span> <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob'>ttheme_default</a></span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>8</span>),
@@ -218,7 +219,7 @@ rather than combining with them.</p></td>
 <span class='no'>diagnostics</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>`Combined test`</span> <span class='kw'>=</span> <span class='st'>"diagnostics.combined.all.summary"</span>,
                  <span class='kw'>`Residual qs-test (p-value)`</span> <span class='kw'>=</span> <span class='st'>"diagnostics.qs"</span>,
                  <span class='kw'>`Residual f-test (p-value)`</span> <span class='kw'>=</span> <span class='st'>"diagnostics.ftest"</span>)
-<span class='no'>p_ipi_fr</span> +
+<span class='no'>p_sa_ipi_fr</span> +
     <span class='fu'>geom_diagnostics</span>(<span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='no'>diagnostics</span>,
                      <span class='kw'>ymin</span> <span class='kw'>=</span> <span class='fl'>58</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='fl'>72</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='fl'>2010</span>,
                      <span class='kw'>table_theme</span> <span class='kw'>=</span> <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob'>ttheme_default</a></span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>8</span>),
@@ -231,7 +232,7 @@ rather than combining with them.</p></td>
                      <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
     <span class='fu'>theme_void</span>()
 
-<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>grid.arrange</a></span>(<span class='no'>p_ipi_fr</span>, <span class='no'>p_diag</span>,
+<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>grid.arrange</a></span>(<span class='no'>p_sa_ipi_fr</span>, <span class='no'>p_diag</span>,
                         <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>heights</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))</div><div class='img'><img src='geom_diagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>

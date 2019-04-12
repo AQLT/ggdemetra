@@ -6,15 +6,14 @@
 [![Build
 Status](https://api.travis-ci.com/AQLT/ggdemetra.svg?branch=master)](https://travis-ci.com/AQLT/ggdemetra)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
-[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg?logo=github)](https://www.tidyverse.org/lifecycle/#experimental)
 
 ## Overview
 
 ggdemetra is an extension of
 [ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal
 adjustment statistics to your plots. The seasonal adjustment process is
-done with (RJDemetra)\[<https://github.com/jdemetra/rjdemetra>\] that is
-an R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
+done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an
+R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
 the seasonal adjustment software [officially
 recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf)
 to the members of the European Statistical System (ESS) and the European

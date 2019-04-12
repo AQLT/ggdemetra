@@ -62,13 +62,14 @@ With the parameter \code{geom = "text"}, the ARIMA model used in the pre-adjustm
 \examples{
 data <- data.frame(x = as.numeric(time(ipi_c_eu)),
                    y = as.numeric(ipi_c_eu[, "FR"]))
-p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
-         x = "time", y = NULL)
+         x = "time", y = NULL) +
+    geom_sa(color = "red", message = FALSE)
          
 # To add the ARIMA model
-p_ipi_fr + 
+p_sa_ipi_fr + 
     geom_arima(geom = "label",
                x_arima = - Inf, y_arima = -Inf, 
                vjust = -1, hjust = -0.1,

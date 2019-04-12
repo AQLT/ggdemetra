@@ -225,18 +225,19 @@ rather than combining with them.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/time'>time</a></span>(<span class='no'>ipi_c_eu</span>)),
                    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/numeric'>as.numeric</a></span>(<span class='no'>ipi_c_eu</span>[, <span class='st'>"FR"</span>]))
-<span class='no'>p_ipi_fr</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
+<span class='no'>p_sa_ipi_fr</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>)) +
     <span class='fu'>geom_line</span>() +
     <span class='fu'>labs</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Seasonal adjustment of the French industrial production index"</span>,
-         <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+         <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)  +
+    <span class='fu'><a href='geom_sa.html'>geom_sa</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># To add the outliers:</span>
-<span class='no'>p_ipi_fr</span> + <span class='fu'>geom_outlier</span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"label"</span>,
+<span class='no'>p_sa_ipi_fr</span> + <span class='fu'>geom_outlier</span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"label"</span>,
                     <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='geom_outlier-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># To have a more readable plot with outliers names that repeled away from each other </span>
 <span class='co'># and from the data points:</span>
-<span class='no'>p_ipi_fr</span> +
+<span class='no'>p_sa_ipi_fr</span> +
     <span class='fu'>geom_outlier</span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"label_repel"</span>,
                  <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>4</span>,
@@ -244,7 +245,7 @@ rather than combining with them.</p></td>
                  <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='fu'>arrow</span>(<span class='kw'>length</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0.03</span>, <span class='st'>"npc"</span>),
                                <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"closed"</span>, <span class='kw'>ends</span> <span class='kw'>=</span> <span class='st'>"last"</span>))</div><div class='img'><img src='geom_outlier-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># To only plot the outliers from a specific date (2009):</span>
-<span class='no'>p_ipi_fr</span> +
+<span class='no'>p_sa_ipi_fr</span> +
     <span class='fu'>geom_outlier</span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"label_repel"</span>,
                  <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                  <span class='kw'>first_date</span> <span class='kw'>=</span> <span class='fl'>2009</span>,

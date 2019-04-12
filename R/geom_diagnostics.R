@@ -17,15 +17,16 @@
 #' @examples 
 #' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
 #'                    y = as.numeric(ipi_c_eu[, "FR"]))
-#' p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#' p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
 #'     geom_line() +
 #'     labs(title = "Seasonal adjustment of the French industrial production index",
-#'          x = "time", y = NULL)
+#'          x = "time", y = NULL) +
+#'     geom_sa(color = "red", message = FALSE)
 #' 
 #' # To add of diagnostics with result of the X-11 combined test and the p-values 
 #' # of the residual seasonality qs and f tests:
 #' diagnostics <- c("diagnostics.combined.all.summary", "diagnostics.qs", "diagnostics.ftest")
-#' p_ipi_fr + 
+#' p_sa_ipi_fr + 
 #'     geom_diagnostics(diagnostics = diagnostics,
 #'                      ymin = 58, ymax = 72, xmin = 2010,
 #'                      table_theme = gridExtra::ttheme_default(base_size = 8),
@@ -36,7 +37,7 @@
 #' diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
 #'                  `Residual qs-test (p-value)` = "diagnostics.qs",
 #'                  `Residual f-test (p-value)` = "diagnostics.ftest")
-#' p_ipi_fr + 
+#' p_sa_ipi_fr + 
 #'     geom_diagnostics(diagnostics = diagnostics,
 #'                      ymin = 58, ymax = 72, xmin = 2010,
 #'                      table_theme = gridExtra::ttheme_default(base_size = 8),
@@ -50,7 +51,7 @@
 #'                      message = FALSE) + 
 #'     theme_void()
 #' 
-#' gridExtra::grid.arrange(p_ipi_fr, p_diag,
+#' gridExtra::grid.arrange(p_sa_ipi_fr, p_diag,
 #'                         nrow = 2, heights  = c(4, 1))
 #' 
 #' @importFrom gridExtra tableGrob ttheme_default

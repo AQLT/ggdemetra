@@ -78,19 +78,20 @@ With the parameter \code{geom = "text"}, the outliers used in the pre-adjustment
 \examples{
 data <- data.frame(x = as.numeric(time(ipi_c_eu)),
                    y = as.numeric(ipi_c_eu[, "FR"]))
-p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
-         x = "time", y = NULL)
+         x = "time", y = NULL)  +
+    geom_sa(color = "red", message = FALSE)
          
 # To add the outliers:
-p_ipi_fr + geom_outlier(geom = "label",
+p_sa_ipi_fr + geom_outlier(geom = "label",
                     message = FALSE)
 
 
 # To have a more readable plot with outliers names that repeled away from each other 
 # and from the data points:
-p_ipi_fr + 
+p_sa_ipi_fr + 
     geom_outlier(geom = "label_repel",
                  message = FALSE,
                  vjust = 4,
@@ -99,7 +100,7 @@ p_ipi_fr +
                                type = "closed", ends = "last"))
 
 # To only plot the outliers from a specific date (2009):
-p_ipi_fr + 
+p_sa_ipi_fr + 
     geom_outlier(geom = "label_repel",
                  message = FALSE,
                  first_date = 2009,
