@@ -10,6 +10,3 @@ r:
 - devel
 
 r_check_args: --as-cran --run-donttest
-
-r_github_packages:
-  - jdemetra/rjdemetra
