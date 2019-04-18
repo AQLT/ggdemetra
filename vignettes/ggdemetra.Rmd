@@ -4,7 +4,7 @@ author: "Alain Quartier-la-Tente"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to ggdemetra}
+  %\VignetteIndexEntry{ggdemetra}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
