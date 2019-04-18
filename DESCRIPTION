@@ -14,7 +14,6 @@ Depends:
 Imports:
     RJDemetra (>= 0.1.2),
     ggrepel,
-    grid,
     gridExtra
 Suggests: 
     knitr,
