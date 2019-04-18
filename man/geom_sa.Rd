@@ -62,9 +62,7 @@ rather than combining with them.}
 Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. \code{geom_sa()} and \code{stat_sa()} are  aliases: they both use the same arguments. Use \code{stat_sa()} if you want to display the results with a non-standard geom.
 }
 \examples{
-data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-                   y = as.numeric(ipi_c_eu[, "FR"]))
-p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = "time", y = NULL)

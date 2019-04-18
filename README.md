@@ -36,17 +36,14 @@ want to add in the graphic:
 
 ## Installation
 
-Since RJDemetra relies on the
-[rJava](https://CRAN.R-project.org/package=rJava) package and Java SE 8
-or later version is required, the same requirements are also needed for
-ggdemetra.
+Since RJDemetra requires Java SE 8 or later version, the same
+requirements are also needed for ggdemetra.
 
-ggdemetra is not on CRAN for the moment and uses the development version
-of RJDemetra. To use it you need to install both GitHub version:
+ggdemetra is not on CRAN for the moment. To use it you need to install
+the GitHub version:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jdemetra/rjdemetra")
 devtools::install_github("AQLT/ggdemetra")
 ```
 
@@ -58,9 +55,8 @@ and of the seasonal adjusted series:
 ``` r
 library(ggplot2)
 library(ggdemetra)
-data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-                   y = as.numeric(ipi_c_eu[, "FR"]))
-p_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+
+p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = "time", y = NULL)
@@ -95,7 +91,7 @@ To add the ARIMA model:
 ``` r
 p_sa + 
     geom_arima(geom = "label",
-               x_arima = - Inf, y_arima = -Inf, 
+               x_arima = -Inf, y_arima = -Inf, 
                vjust = -1, hjust = -0.1,
                message = FALSE)
 #> Frenquency used: 12
@@ -109,7 +105,7 @@ To add a table of diagnostics below the plot:
 diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
                  `Residual qs-test (p-value)` = "diagnostics.qs",
                  `Residual f-test (p-value)` = "diagnostics.ftest")
-p_diag <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_diagnostics(diagnostics = diagnostics,
                      table_theme = gridExtra::ttheme_default(base_size = 8),
                      message = FALSE) + 

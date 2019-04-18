@@ -15,9 +15,7 @@
 #' 
 #' 
 #' @examples 
-#' data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-#'                    y = as.numeric(ipi_c_eu[, "FR"]))
-#' p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#' p_sa_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
 #'     geom_line() +
 #'     labs(title = "Seasonal adjustment of the French industrial production index",
 #'          x = "time", y = NULL) +
@@ -45,7 +43,7 @@
 #' 
 #' # To add the table below the plot: 
 #' 
-#' p_diag <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+#' p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
 #'     geom_diagnostics(diagnostics = diagnostics,
 #'                      table_theme = gridExtra::ttheme_default(base_size = 8),
 #'                      message = FALSE) + 

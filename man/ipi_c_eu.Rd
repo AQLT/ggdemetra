@@ -3,13 +3,16 @@
 \docType{data}
 \name{ipi_c_eu}
 \alias{ipi_c_eu}
+\alias{ipi_c_eu_df}
 \title{Industrial Production Indices in manufacturing in the European Union}
-\format{A monthly \code{ts} object from january 1990 to december 2017 with 37 variables.}
+\format{A monthly \code{ts} object from january 1990 to december 2017 with 37 variables for \code{ipi_c_eu} and a \code{data.frame} for \code{ipi_c_eu_df}.}
 \source{
 \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 }
 \usage{
 ipi_c_eu
+
+ipi_c_eu_df
 }
 \description{
 A dataset containing on monthly industrial production indices in manufacturing in the European Union (from sts_inpr_m dataset of Eurostat). Data are based 100 in 2015 and are unadjusted, i.e. neither seasonally adjusted nor calendar adjusted.

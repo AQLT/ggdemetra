@@ -43,9 +43,11 @@
 #' BA        \tab Bosnia and Herzegovina                          
 #' }
 #' @docType data
-#' @format A monthly \code{ts} object from january 1990 to december 2017 with 37 variables.
+#' @format A monthly \code{ts} object from january 1990 to december 2017 with 37 variables for \code{ipi_c_eu} and a \code{data.frame} for \code{ipi_c_eu_df}.
 #' @source \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 "ipi_c_eu"
+#' @rdname ipi_c_eu
+"ipi_c_eu_df"
 
 # # To update data:
 # ipi_c_eu <- eurostat::get_eurostat("sts_inpr_m",select_time = "M",
@@ -53,10 +55,14 @@
 #                                                   unit = "I15", s_adj = "CA",
 #                                                   sinceTimePeriod = "1990M01"))
 # ipi_c_eu <- reshape2::dcast(ipi_c_eu, time ~ geo,  value.var = "values")
-# ipi_c_eu <- ts(ipi_c_eu[, c("EU28", "EU27_2019", "EA19", "BE", "BG", "CZ", "DK", "DE", 
-#                             "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", 
-#                             "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE", 
+# ipi_c_eu <- ts(ipi_c_eu[, c("EU28", "EU27_2019", "EA19", "BE", "BG", "CZ", "DK", "DE",
+#                             "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU",
+#                             "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE",
 #                             "UK", "NO", "ME", "MK", "RS", "TR", "BA")],
 #                start = c(1990, 1), frequency = 12)
 # # Last date is removed due to NA:
-# ipi_c_eu <- window(ipi_c_eu, end = tail(time(ipi_c_eu),1) - 1/12) 
+# ipi_c_eu <- window(ipi_c_eu, end = tail(time(ipi_c_eu),1) - 1/12)
+# ipi_c_eu_df <- data.frame(date = as.numeric(time(ipi_c_eu)),
+#                           apply(ipi_c_eu,2,as.numeric))
+# save(ipi_c_eu,file = "data/ipi_c_eu.rda")
+# save(ipi_c_eu_df,file = "data/ipi_c_eu_df.rda")

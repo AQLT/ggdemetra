@@ -76,9 +76,7 @@ Function to add directly to the plot the outliers used in the pre-adjustment pro
 With the parameter \code{geom = "text"}, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With \code{geom = "label"} a rectangle is drawn behind the names of the outliers, making them easier to read. The same with \code{geom = "text_repel"} or \code{geom = "label_repel"} but text labels are also repeled away from each other and away from the data points (see \link[ggrepel:geom_label_repel]{geom_label_repel()}).
 }
 \examples{
-data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-                   y = as.numeric(ipi_c_eu[, "FR"]))
-p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_sa_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = "time", y = NULL)  +

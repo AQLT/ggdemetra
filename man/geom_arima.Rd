@@ -60,9 +60,7 @@ Function to add directly to the plot the ARIMA model used in the pre-adjustment 
 With the parameter \code{geom = "text"}, the ARIMA model used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With \code{geom = "label"} a rectangle is drawn behind the ARIMA model, making it easier to read.
 }
 \examples{
-data <- data.frame(x = as.numeric(time(ipi_c_eu)),
-                   y = as.numeric(ipi_c_eu[, "FR"]))
-p_sa_ipi_fr <- ggplot(data = data, mapping = aes(x = x, y = y)) +
+p_sa_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = "time", y = NULL) +
