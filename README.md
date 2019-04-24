@@ -6,6 +6,12 @@
 [![Build
 Status](https://api.travis-ci.com/AQLT/ggdemetra.svg?branch=master)](https://travis-ci.com/AQLT/ggdemetra)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+[![CRAN last
+release](http://www.r-pkg.org/badges/last-release/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+[![CRAN monthly
+downloads](http://cranlogs.r-pkg.org/badges/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
+[![CRAN
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 
 ## Overview
 
@@ -39,10 +45,11 @@ want to add in the graphic:
 Since RJDemetra requires Java SE 8 or later version, the same
 requirements are also needed for ggdemetra.
 
-ggdemetra is not on CRAN for the moment. To use it you need to install
-the GitHub version:
-
 ``` r
+# Install release version from CRAN
+install.packages("ggdemetra")
+
+# Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("AQLT/ggdemetra")
 ```
