@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggdemetra
+# ggdemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![Build
 Status](https://api.travis-ci.com/AQLT/ggdemetra.svg?branch=master)](https://travis-ci.com/AQLT/ggdemetra)

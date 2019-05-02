@@ -8,6 +8,13 @@
 
 <title>Table of diagnostics — geom_diagnostics • ggdemetra</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -33,6 +40,8 @@
 <meta property="og:title" content="Table of diagnostics — geom_diagnostics" />
 
 <meta property="og:description" content="Adds a table of diagnostics to the plot" />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -211,8 +220,7 @@ rather than combining with them.</p></td>
     <span class='fu'>geom_diagnostics</span>(<span class='kw'>diagnostics</span> <span class='kw'>=</span> <span class='no'>diagnostics</span>,
                      <span class='kw'>ymin</span> <span class='kw'>=</span> <span class='fl'>58</span>, <span class='kw'>ymax</span> <span class='kw'>=</span> <span class='fl'>72</span>, <span class='kw'>xmin</span> <span class='kw'>=</span> <span class='fl'>2010</span>,
                      <span class='kw'>table_theme</span> <span class='kw'>=</span> <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob'>ttheme_default</a></span>(<span class='kw'>base_size</span> <span class='kw'>=</span> <span class='fl'>8</span>),
-                     <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='geom_diagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># To customize the names of the diagnostics in the plot:</span>
+                     <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='geom_diagnostics-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># To customize the names of the diagnostics in the plot:</span>
 
 <span class='no'>diagnostics</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='kw'>`Combined test`</span> <span class='kw'>=</span> <span class='st'>"diagnostics.combined.all.summary"</span>,
                  <span class='kw'>`Residual qs-test (p-value)`</span> <span class='kw'>=</span> <span class='st'>"diagnostics.qs"</span>,
@@ -231,8 +239,7 @@ rather than combining with them.</p></td>
     <span class='fu'>theme_void</span>()
 
 <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>grid.arrange</a></span>(<span class='no'>p_sa_ipi_fr</span>, <span class='no'>p_diag</span>,
-                        <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>heights</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))</div><div class='img'><img src='geom_diagnostics-3.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+                        <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>heights</span>  <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>, <span class='fl'>1</span>))</div><div class='img'><img src='geom_diagnostics-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
