@@ -6,12 +6,14 @@ StatArima <- ggproto("StatArima", Stat,
                                               spec = NULL,
                                               frequency = NULL,
                                               message = TRUE,
-                                              x_arima = NULL, y_arima = NULL) {
+                                              x_arima = NULL, y_arima = NULL,
+                                              new_data = TRUE) {
                          result <- seasonal_adjustment(data = data,
                                                        method = method,
                                                        spec = spec,
                                                        frequency = frequency,
-                                                       message = message)
+                                                       message = message,
+                                                       new_data = new_data)
                          data <- result[["data"]]
                          sa <- result[["sa"]]
                          arima_model <- RJDemetra::get_indicators(sa,
@@ -85,6 +87,7 @@ geom_arima <- function(mapping = NULL, data = NULL, stat = "arima",
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,
                                  x_arima = x_arima, y_arima = y_arima,
+                                 new_data = !missing(data) || is.null(data),
                                  ...))
 }
 

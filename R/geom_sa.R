@@ -5,12 +5,14 @@ StatSa <- ggproto("StatSa", Stat,
                                            spec = NULL,
                                            frequency = NULL,
                                            message = TRUE,
-                                           component = "sa") {
+                                           component = "sa",
+                                           new_data = TRUE) {
                       result <- seasonal_adjustment(data = data,
                                                     method = method,
                                                     spec = spec,
                                                     frequency = frequency,
-                                                    message = message)
+                                                    message = message,
+                                                    new_data = new_data)
                       data <- result[["data"]]
                       sa <- result[["sa"]]
                       component <- component[1]
@@ -43,7 +45,7 @@ StatSa <- ggproto("StatSa", Stat,
 #'   [aes_()][ggplot2::aes_]. If specified and `inherit.aes = TRUE` (the
 #'   default), it is combined with the default mapping at the top level of the
 #'   plot. You must supply `mapping` if there is no plot mapping.
-#' @param data A \code{data.frame} that contains the data used for the seasonal adjustment. By default,
+#' @param data A \code{data.frame} that contains the data used for the seasonal adjustment.
 #' @param geom The geometric object to use to display the data
 #' @param stat The statistical transformation to use on the data for this
 #'    layer, as a string.
@@ -102,7 +104,9 @@ geom_sa <- function(mapping = NULL, data = NULL, stat = "sa",
                    position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,
-                                 component = component, ...))
+                                 component = component,
+                                 new_data = !missing(data) || !is.null(data),
+                                 ...))
 }
 #' @rdname geom_sa
 #' @name geom_sa
@@ -121,6 +125,8 @@ stat_sa <- function(mapping = NULL, data = NULL, geom = "line",
         position = position, show.legend = show.legend, inherit.aes = inherit.aes,
         params = list(method = method, spec = spec, 
                       frequency = frequency, message = message,
-                      component = component, ...)
+                      component = component,
+                      new_data = !missing(data) || !is.null(data),
+                      ...)
     )
 }

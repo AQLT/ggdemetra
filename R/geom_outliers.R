@@ -10,12 +10,14 @@ StatOutlier <- ggproto("StatOutlier", Stat,
                                                 first_date = NULL,
                                                 last_date = NULL,
                                                 coefficients = FALSE,
-                                                digits = 1){
+                                                digits = 1,
+                                                new_data = TRUE){
                            result <- seasonal_adjustment(data = data,
                                                          method = method,
                                                          spec = spec,
                                                          frequency = frequency,
-                                                         message = message)
+                                                         message = message,
+                                                         new_data = new_data)
                            data <- result[["data"]]
                            sa <- result[["sa"]]
                            frequency <- result[["frequency"]]
@@ -160,6 +162,7 @@ geom_outlier <- function(mapping = NULL, data = NULL,
                                  frequency = frequency, message = message,
                                  first_date = first_date, last_date = last_date,
                                  coefficients = coefficients, digits = digits,
+                                 new_data = !missing(data) || !is.null(data),
                                  ...))
 }
 

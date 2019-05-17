@@ -68,9 +68,9 @@ p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = "time", y = NULL)
 p_sa <- p_ipi_fr +
-    geom_sa(component = "y_f", linetype = 2, message = TRUE) + 
-    geom_sa(component = "sa", color = "red", message = FALSE) +
-    geom_sa(component = "sa_f", color = "red", linetype = 2, message = FALSE)
+    geom_sa(component = "y_f", linetype = 2) + 
+    geom_sa(component = "sa", color = "red") +
+    geom_sa(component = "sa_f", color = "red", linetype = 2)
 p_sa
 ```
 
@@ -83,12 +83,10 @@ point and the estimate coefficient:
 p_sa + 
     geom_outlier(geom = "label_repel",
                  coefficients = TRUE,
-                 message = FALSE,
                  vjust = 4,
                  ylim = c(NA, 65), force = 10,
                  arrow = arrow(length = unit(0.03, "npc"),
                                type = "closed", ends = "last"))
-#> Frenquency used: 12
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
@@ -99,8 +97,7 @@ To add the ARIMA model:
 p_sa + 
     geom_arima(geom = "label",
                x_arima = -Inf, y_arima = -Inf, 
-               vjust = -1, hjust = -0.1,
-               message = FALSE)
+               vjust = -1, hjust = -0.1)
 #> Frenquency used: 12
 ```
 
@@ -114,13 +111,11 @@ diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
                  `Residual f-test (p-value)` = "diagnostics.ftest")
 p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_diagnostics(diagnostics = diagnostics,
-                     table_theme = gridExtra::ttheme_default(base_size = 8),
-                     message = FALSE) + 
+                     table_theme = gridExtra::ttheme_default(base_size = 8)) + 
     theme_void()
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1))
-#> Frenquency used: 12
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />

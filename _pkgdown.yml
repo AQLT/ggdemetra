@@ -19,6 +19,9 @@ navbar:
     intro:
       text: Get started
       href: articles/ggdemetra.html
+    news:
+      text: News
+      href: news/index.html
     rjdemetra:
       text: RJDemetra
       href: https://github.com/jdemetra/rjdemetra

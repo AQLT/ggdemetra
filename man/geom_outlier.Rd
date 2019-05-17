@@ -17,7 +17,7 @@ geom_outlier(mapping = NULL, data = NULL, stat = "outlier",
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{A \code{data.frame} that contains the data used for the seasonal adjustment. By default,}
+\item{data}{A \code{data.frame} that contains the data used for the seasonal adjustment.}
 
 \item{stat}{The statistical transformation to use on the data for this
 layer, as a string.}

@@ -74,6 +74,7 @@ geom_diagnostics <- function(mapping = NULL, data = NULL,
                                  digits = digits, diagnostics = diagnostics,
                                  xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax,
                                  table_theme = table_theme,
+                                 new_data = !missing(data) || !is.null(data),
                                  ...))
 }
 # Code largely inspired by GeomCustomAnn of ggplot2
@@ -122,14 +123,16 @@ StatDiagnostics <- ggproto("StatDiagnostics", Stat,
                                                 diagnostics = NULL,
                                                 digits = 2,
                                                 first_date = NULL,
-                                                last_date = NULL){
+                                                last_date = NULL,
+                                                new_data = TRUE){
                            if (is.null(diagnostics))
                                return(NULL)
                            result <- seasonal_adjustment(data = data,
                                                          method = method,
                                                          spec = spec,
                                                          frequency = frequency,
-                                                         message = message)
+                                                         message = message,
+                                                         new_data = new_data)
                            data <- result[["data"]]
                            sa <- result[["sa"]]
                            frequency <- result[["frequency"]]

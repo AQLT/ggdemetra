@@ -16,7 +16,7 @@ geom_diagnostics(mapping = NULL, data = NULL, position = "identity",
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
-\item{data}{A \code{data.frame} that contains the data used for the seasonal adjustment. By default,}
+\item{data}{A \code{data.frame} that contains the data used for the seasonal adjustment.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
