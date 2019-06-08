@@ -67,7 +67,7 @@ dataframe2ts <- function(data, frequency = NULL, message = TRUE){
         first_date <- dates[1]
     }
     if (!frequency %in% c(2, 4, 6, 12))
-        stop("Couldn't pick automatically the frequency: you must specify manually the argument 'frequency'")
+        stop("Error with the frequency: it must be equal to 12, 6, 4 or 2")
     
     .demetra$frequency <- frequency
     ts(data$y, start = first_date, frequency = frequency)
