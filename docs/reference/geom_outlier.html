@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggdemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -89,6 +89,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">RJDemetra</a>
@@ -137,14 +140,14 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes()</a> or
-<a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes_'>aes_()</a>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a> or
+<a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_()</a>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code>data.frame</code> that contains the data used for the seasonal adjustment. By default,</p></td>
+      <td><p>A <code>data.frame</code> that contains the data used for the seasonal adjustment.</p></td>
     </tr>
     <tr>
       <th>stat</th>
@@ -154,8 +157,8 @@ layer, as a string.</p></td>
     <tr>
       <th>geom</th>
       <td><p>character. The geometric to use to display the data:
-<code>GeomText</code> (<code>geom = "text"</code>, the default, see <a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text()</a>);
-<code>GeomLabel</code> (<code>geom = "label"</code>, see <a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_label()</a>);
+<code>GeomText</code> (<code>geom = "text"</code>, the default, see <a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text()</a>);
+<code>GeomLabel</code> (<code>geom = "label"</code>, see <a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_label()</a>);
 <code>GeomTextRepel</code> (<code>geom = "text_repel"</code>, the default, see <a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>geom_text_repel()</a>);
 <code>GeomLabelRepel</code> (<code>geom = "label_repel"</code>, the default, see <a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>geom_label_repel()</a>).</p></td>
     </tr>
@@ -166,9 +169,9 @@ a call to a position adjustment function.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed on to <a href='https://www.rdocumentation.org/packages/ggplot2/topics/layer'>layer()</a>. They may be parameters of
-<a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_text()</a> (if <code>geom = "text"</code>),
-<a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_label()</a> (if <code>geom = "label"</code>),
+      <td><p>Other arguments passed on to <a href='https://ggplot2.tidyverse.org/reference/layer.html'>layer()</a>. They may be parameters of
+<a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text()</a> (if <code>geom = "text"</code>),
+<a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_label()</a> (if <code>geom = "label"</code>),
 <a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>geom_text_repel()</a> (if <code>geom = "text_repel"</code>)
 or <a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>geom_label_repel()</a> (if <code>geom = "label_repel"</code>).</p></td>
     </tr>

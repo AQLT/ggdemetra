@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggdemetra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -89,6 +89,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="https://github.com/jdemetra/rjdemetra">RJDemetra</a>
@@ -140,14 +143,14 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes()</a> or
-<a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes_'>aes_()</a>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a> or
+<a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_()</a>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A <code>data.frame</code> that contains the data used for the seasonal adjustment. By default,</p></td>
+      <td><p>A <code>data.frame</code> that contains the data used for the seasonal adjustment.</p></td>
     </tr>
     <tr>
       <th>stat</th>
@@ -161,7 +164,7 @@ a call to a position adjustment function.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed on to <a href='https://www.rdocumentation.org/packages/ggplot2/topics/layer'>layer()</a>. These are
+      <td><p>Other arguments passed on to <a href='https://ggplot2.tidyverse.org/reference/layer.html'>layer()</a>. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>colour = "red"</code> or <code>size = 3</code>.</p></td>
     </tr>
@@ -217,7 +220,7 @@ rather than combining with them.</p></td>
 
 <span class='co'># To add the seasonal adjusted series:</span>
 <span class='no'>p_ipi_fr</span> +
-    <span class='fu'>geom_sa</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='output co'>#&gt; <span class='message'>Frenquency used: 12</span></div><div class='img'><img src='geom_sa-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <span class='fu'>geom_sa</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='img'><img src='geom_sa-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># To add the forecasts of the input data and the seasonal adjusted series:</span>
 <span class='no'>p_sa</span> <span class='kw'>&lt;-</span> <span class='no'>p_ipi_fr</span> +
     <span class='fu'>geom_sa</span>(<span class='kw'>component</span> <span class='kw'>=</span> <span class='st'>"y_f"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>message</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +

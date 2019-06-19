@@ -36,7 +36,7 @@ All the functions have some common parameters and especially those to defined th
 - `spec` is the seasonal adjustment specification. It can be the name of pre-defined specification (see `?RJDemetra::x13` or `?RJDemetra::tramoseats`) or a user-defined specification created by `RJDemetra` (by `RJDemetra::x13_spec` or `RJDemetra::tramoseats_spec`).  
 - `frequency` is the frequency of the input time series. By default, the frequency is computed and a message is printed with the one chosen (use `message = FALSE` to suppress this message).
 
-In the following examples, the default seasonal adjustment specification will be used on the French industrial production index. The seasonal adjustment will then be processed with X-13ARIMA with a pre-defined specification `"RSA5c` (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment), even if this is not the specification that should be used for this series. Indeed, in the industrial production th working day effect has more economic sense than the trading day effect and a gradual effect for easter does not make economic sense for the aggregated series. The specification that should be used with X-13ARIMA is `spec = RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")` but, to simplify the examples that follow, we will use the default one.
+In the following examples, the data used is the French industrial production index. By default, the seasonal adjustment will then be processed with X-13ARIMA with a pre-defined specification `"RSA5c` (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). However, in the industrial production the working day effect has more economic sense than the trading day effect and a gradual effect for easter does not make economic sense for the aggregated series. The specification that should be used with X-13ARIMA is `spec = RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")`. If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify this parameter once.
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
@@ -44,7 +44,7 @@ library(ggdemetra)
 p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
-         x = "time", y = NULL)
+         x = NULL, y = NULL)
 p_ipi_fr
 ```
 
@@ -58,17 +58,20 @@ sa <- jx13(ipi_c_eu[, "FR"])
 By default `geom_sa()` adds the seasonal adjusted time series:
 
 ```{r}
+spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
 p_ipi_fr +
-    geom_sa(color = "red")
+    geom_sa(color = "red",
+            spec = spec)
 ```
 
 To add other components of the seasonal adjustment, use the `component` parameter of `geom_sa()` (see `?RJDemetra::user_defined_variables()` for the availables parameters). For example, to add the forecasts of the input data and of the seasonal adjusted series:
 
 ```{r}
 p_sa <- p_ipi_fr +
-    geom_sa(component = "y_f", linetype = 2, message = FALSE) + 
-    geom_sa(component = "sa", color = "red", message = FALSE) +
-    geom_sa(component = "sa_f", color = "red", linetype = 2, message = FALSE)
+    geom_sa(component = "y_f", linetype = 2, message = FALSE,
+            spec = spec) + 
+    geom_sa(component = "sa", color = "red") +
+    geom_sa(component = "sa_f", color = "red", linetype = 2)
 p_sa
 ```
 
@@ -82,15 +85,13 @@ There are four differents geometrics to add to the plot the names of the outlier
 In our example, there are `r get_indicators(sa, "preprocessing.model.nout")[[1]]` outliers:
 
 ```{r}
-p_sa + geom_outlier(geom = "label",
-                    message = FALSE)
+p_sa + geom_outlier(geom = "label")
 ```
 
 They can be plotted in more readable way using the parameters of `ggrepel::geom_label_repel`:
 ```{r}
 p_sa + 
     geom_outlier(geom = "label_repel",
-                 message = FALSE,
                  vjust = 4,
                  ylim = c(NA, 65), force = 10,
                  arrow = arrow(length = unit(0.03, "npc"),
@@ -101,7 +102,6 @@ Use the parameters `first_date` and `last_date` to only have the outliers in a p
 ```{r}
 p_sa + 
     geom_outlier(geom = "label_repel",
-                 message = FALSE,
                  first_date = 2009,
                  vjust = 4,
                  ylim = c(NA, 65), force = 10,
@@ -118,8 +118,7 @@ arima()`. The parameter `geom = "label"` draws a rectangle behind the ARIMA mode
 p_sa + 
     geom_arima(geom = "label",
                x_arima = -Inf, y_arima = -Inf, 
-               vjust = -1, hjust = -0.1,
-               message = FALSE)
+               vjust = -1, hjust = -0.1)
 ```
 
 # Add a table with some diagnostics
@@ -131,8 +130,7 @@ diagnostics <- c("diagnostics.combined.all.summary", "diagnostics.qs", "diagnost
 p_sa + 
     geom_diagnostics(diagnostics = diagnostics,
                      ymin = 58, ymax = 72, xmin = 2010,
-                     table_theme = gridExtra::ttheme_default(base_size = 8),
-                     message = FALSE)
+                     table_theme = gridExtra::ttheme_default(base_size = 8))
 ```
 
 To customize the names of the diagnostics in the plot, pass a named vector to the `diagnostics` parameter:
@@ -144,8 +142,7 @@ diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
 p_sa + 
     geom_diagnostics(diagnostics = diagnostics,
                      ymin = 58, ymax = 72, xmin = 2010,
-                     table_theme = gridExtra::ttheme_default(base_size = 8),
-                     message = FALSE)
+                     table_theme = gridExtra::ttheme_default(base_size = 8))
 ```
 
 
@@ -153,10 +150,11 @@ To add the table below the plot, you can for example use `gridExtra::grid.arrang
 ```{r}
 p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR))  +
     geom_diagnostics(diagnostics = diagnostics,
+                     spec = spec,
                      table_theme = gridExtra::ttheme_default(base_size = 8),
                      message = FALSE) + 
     theme_void()
     
 gridExtra::grid.arrange(p_sa, p_diag,
-             nrow = 2, heights  = c(4, 1))
+             nrow = 2, heights  = c(4, 1.5))
 ```
