@@ -82,8 +82,7 @@ p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = NULL, y = NULL)
 p_sa <- p_ipi_fr +
-    geom_sa(component = "y_f", linetype = 2,
-            spec = spec) + 
+    geom_sa(component = "y_f", linetype = 2) + 
     geom_sa(component = "sa", color = "red") +
     geom_sa(component = "sa_f", color = "red", linetype = 2)
 p_sa
@@ -132,7 +131,6 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
-#> Frenquency used: 12
 ```
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
