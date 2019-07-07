@@ -64,11 +64,7 @@ specification), these parameters is inherited from the previous defined:
 therefore you only need to specify the specification once. In the
 following examples, the seasonal adjustment will be perform with
 X-13-ARIMA with working day adjustment and no gradual easter effect
-adjustment:
-
-``` r
-spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
-```
+adjustment.
 
 To add the seasonal adjusted series and the forecasts of the input data
 and of the seasonal adjusted series:
@@ -76,6 +72,7 @@ and of the seasonal adjusted series:
 ``` r
 library(ggplot2)
 library(ggdemetra)
+spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
 
 p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
@@ -89,7 +86,7 @@ p_sa <- p_ipi_fr +
 p_sa
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 To add the outliers at the bottom of the plot with an arrow to the data
 point and the estimated coefficients:
@@ -104,7 +101,7 @@ p_sa +
                                type = "closed", ends = "last"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
 To add the ARIMA model:
 
@@ -116,7 +113,7 @@ p_sa +
 #> Frenquency used: 12
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 To add a table of diagnostics below the plot:
 
@@ -135,4 +132,4 @@ gridExtra::grid.arrange(p_sa, p_diag,
 #> Frenquency used: 12
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
