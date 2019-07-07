@@ -54,6 +54,10 @@ install.packages("ggdemetra")
 devtools::install_github("AQLT/ggdemetra")
 ```
 
+If you have troubles with the installation of RJDemetra, check the
+[installation
+manual](https://github.com/jdemetra/rjdemetra/wiki/Installation-manual).
+
 ## Usage
 
 By default, the seasonal adjustment is made with X-13-ARIMA with the
@@ -133,3 +137,7 @@ gridExtra::grid.arrange(p_sa, p_diag,
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
+See the
+[vignette](https://aqlt.github.io/ggdemetra/articles/ggdemetra.html) for
+more details.

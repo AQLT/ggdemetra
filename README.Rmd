@@ -44,6 +44,8 @@ install.packages("ggdemetra")
 devtools::install_github("AQLT/ggdemetra")
 ```
 
+If you have troubles with the installation of RJDemetra, check the [installation manual](https://github.com/jdemetra/rjdemetra/wiki/Installation-manual).
+
 ## Usage
 
 By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification "RSA5c"  (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment.
@@ -100,3 +102,6 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
 ```
+
+
+See the [vignette](https://aqlt.github.io/ggdemetra/articles/ggdemetra.html) for more details.
