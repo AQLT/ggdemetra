@@ -48,7 +48,7 @@ If you have troubles with the installation of RJDemetra, check the [installation
 
 ## Usage
 
-By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification "RSA5c"  (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment.
+By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification "RSA5c"  (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment (it is the specification that has the most economic sense for the industrial production index).
 
 To add the seasonal adjusted series and the forecasts of the input data and of the seasonal adjusted series:
 ```{r, warning=FALSE, message=FALSE}

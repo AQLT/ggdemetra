@@ -87,7 +87,7 @@ geom_arima <- function(mapping = NULL, data = NULL, stat = "arima",
                    params = list(method = method, spec = spec, 
                                  frequency = frequency, message = message,
                                  x_arima = x_arima, y_arima = y_arima,
-                                 new_data = !missing(data) || is.null(data),
+                                 new_data = !missing(data) || !is.null(data),
                                  ...))
 }
 

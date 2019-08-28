@@ -68,7 +68,8 @@ specification), these parameters is inherited from the previous defined:
 therefore you only need to specify the specification once. In the
 following examples, the seasonal adjustment will be perform with
 X-13-ARIMA with working day adjustment and no gradual easter effect
-adjustment.
+adjustment (it is the specification that has the most economic sense for
+the industrial production index).
 
 To add the seasonal adjusted series and the forecasts of the input data
 and of the seasonal adjusted series:
@@ -114,7 +115,6 @@ p_sa +
     geom_arima(geom = "label",
                x_arima = -Inf, y_arima = -Inf, 
                vjust = -1, hjust = -0.1)
-#> Frenquency used: 12
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
@@ -133,7 +133,6 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
-#> Frenquency used: 12
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
