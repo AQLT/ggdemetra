@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>'ggplot2' Extension for Seasonal and Trading Day Adjustment with 'RJDemetra' • ggdemetra</title>
+<title>ggplot2 Extension for Seasonal and Trading Day Adjustment with RJDemetra • ggdemetra</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -13,11 +13,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="'ggplot2' Extension for Seasonal and Trading Day Adjustment with 'RJDemetra'">
-<meta property="og:description" content="Provides 'ggplot2' functions to return the results of seasonal and trading day adjustment 
-    made by 'RJDemetra'. 'RJDemetra' is an 'R' interface around 'JDemetra+' (&lt;https://github.com/jdemetra/jdemetra-app&gt;),
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="ggplot2 Extension for Seasonal and Trading Day Adjustment with RJDemetra">
+<meta property="og:description" content="Provides ggplot2 functions to return the results of seasonal and trading day adjustment 
+    made by RJDemetra. RJDemetra is an R interface around JDemetra+ (&lt;https://github.com/jdemetra/jdemetra-app&gt;),
     the seasonal adjustment software officially recommended to the members of the European Statistical System and
     the European System of Central Banks.">
 <meta property="og:image" content="/logo.png">
@@ -28,7 +29,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -96,13 +97,9 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
 <div id="ggdemetra" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ggdemetra" class="anchor"></a>ggdemetra <img src="reference/figures/logo.png" align="right" alt="">
@@ -130,11 +127,11 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Since RJDemetra requires Java SE 8 or later version, the same requirements are also needed for ggdemetra.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install release version from CRAN</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"ggdemetra"</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ggdemetra"</span>)</a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Install development version from GitHub</span></a>
 <a class="sourceLine" id="cb1-5" title="5"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"AQLT/ggdemetra"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"AQLT/ggdemetra"</span>)</a></code></pre></div>
 <p>If you have troubles with the installation of RJDemetra, check the <a href="https://github.com/jdemetra/rjdemetra/wiki/Installation-manual">installation manual</a>.</p>
 </div>
 <div id="usage" class="section level2">
@@ -142,9 +139,9 @@
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification “RSA5c” (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment (it is the specification that has the most economic sense for the industrial production index).</p>
 <p>To add the seasonal adjusted series and the forecasts of the input data and of the seasonal adjusted series:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggdemetra)</a>
-<a class="sourceLine" id="cb2-3" title="3">spec &lt;-<span class="st"> </span>RJDemetra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/RJDemetra/topics/x13_spec">x13_spec</a></span>(<span class="st">"RSA3"</span>, <span class="dt">tradingdays.option =</span> <span class="st">"WorkingDays"</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggdemetra)</a>
+<a class="sourceLine" id="cb2-3" title="3">spec &lt;-<span class="st"> </span>RJDemetra<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RJDemetra/man/x13_spec.html">x13_spec</a></span>(<span class="st">"RSA3"</span>, <span class="dt">tradingdays.option =</span> <span class="st">"WorkingDays"</span>)</a>
 <a class="sourceLine" id="cb2-4" title="4"></a>
 <a class="sourceLine" id="cb2-5" title="5">p_ipi_fr &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> ipi_c_eu_df, <span class="dt">mapping =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> FR)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-6" title="6"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() <span class="op">+</span></a>
@@ -156,35 +153,35 @@
 <a class="sourceLine" id="cb2-12" title="12"><span class="st">    </span><span class="kw"><a href="reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-13" title="13"><span class="st">    </span><span class="kw"><a href="reference/geom_sa.html">geom_sa</a></span>(<span class="dt">component =</span> <span class="st">"sa_f"</span>, <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb2-14" title="14">p_sa</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;"></p>
 <p>To add the outliers at the bottom of the plot with an arrow to the data point and the estimated coefficients:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_outlier.html">geom_outlier</a></span>(<span class="dt">geom =</span> <span class="st">"label_repel"</span>,</a>
 <a class="sourceLine" id="cb3-3" title="3">                 <span class="dt">coefficients =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb3-4" title="4">                 <span class="dt">vjust =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb3-5" title="5">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb3-5" title="5">                 <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">NA</span>, <span class="dv">65</span>), <span class="dt">force =</span> <span class="dv">10</span>,</a>
 <a class="sourceLine" id="cb3-6" title="6">                 <span class="dt">arrow =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">arrow</a></span>(<span class="dt">length =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/reexports.html">unit</a></span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>),</a>
 <a class="sourceLine" id="cb3-7" title="7">                               <span class="dt">type =</span> <span class="st">"closed"</span>, <span class="dt">ends =</span> <span class="st">"last"</span>))</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" style="display: block; margin: auto;"></p>
 <p>To add the ARIMA model:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">p_sa <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="st">    </span><span class="kw"><a href="reference/geom_arima.html">geom_arima</a></span>(<span class="dt">geom =</span> <span class="st">"label"</span>,</a>
 <a class="sourceLine" id="cb4-3" title="3">               <span class="dt">x_arima =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">y_arima =</span> <span class="op">-</span><span class="ot">Inf</span>, </a>
 <a class="sourceLine" id="cb4-4" title="4">               <span class="dt">vjust =</span> <span class="dv">-1</span>, <span class="dt">hjust =</span> <span class="fl">-0.1</span>)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;"></p>
 <p>To add a table of diagnostics below the plot:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">`</span><span class="dt">Combined test</span><span class="st">`</span> =<span class="st"> "diagnostics.combined.all.summary"</span>,</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">diagnostics &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">`</span><span class="dt">Combined test</span><span class="st">`</span> =<span class="st"> "diagnostics.combined.all.summary"</span>,</a>
 <a class="sourceLine" id="cb5-2" title="2">                 <span class="st">`</span><span class="dt">Residual qs-test (p-value)</span><span class="st">`</span> =<span class="st"> "diagnostics.qs"</span>,</a>
 <a class="sourceLine" id="cb5-3" title="3">                 <span class="st">`</span><span class="dt">Residual f-test (p-value)</span><span class="st">`</span> =<span class="st"> "diagnostics.ftest"</span>)</a>
 <a class="sourceLine" id="cb5-4" title="4">p_diag &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> ipi_c_eu_df, <span class="dt">mapping =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> FR)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="st">    </span><span class="kw"><a href="reference/geom_diagnostics.html">geom_diagnostics</a></span>(<span class="dt">diagnostics =</span> diagnostics,</a>
-<a class="sourceLine" id="cb5-6" title="6">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/tableGrob">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb5-6" title="6">                     <span class="dt">table_theme =</span> gridExtra<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/gridExtra/man/tableGrob.html">ttheme_default</a></span>(<span class="dt">base_size =</span> <span class="dv">8</span>),</a>
 <a class="sourceLine" id="cb5-7" title="7">                     <span class="dt">message =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span>()</a>
 <a class="sourceLine" id="cb5-9" title="9">    </a>
-<a class="sourceLine" id="cb5-10" title="10">gridExtra<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange</a></span>(p_sa, p_diag,</a>
-<a class="sourceLine" id="cb5-11" title="11">             <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">heights  =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="fl">1.5</span>))</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
+<a class="sourceLine" id="cb5-10" title="10">gridExtra<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span>(p_sa, p_diag,</a>
+<a class="sourceLine" id="cb5-11" title="11">             <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">heights  =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>, <span class="fl">1.5</span>))</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;"></p>
 <p>See the <a href="https://aqlt.github.io/ggdemetra/articles/ggdemetra.html">vignette</a> for more details.</p>
 </div>
 </div>
@@ -205,7 +202,7 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://joinup.ec.europa.eu/software/page/eupl">EUPL</a></li>
+<li>EUPL</li>
 </ul>
 </div>
 <div class="developers">
@@ -215,7 +212,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.com/AQLT/ggdemetra"><img src="https://api.travis-ci.com/AQLT/ggdemetra.svg?branch=master" alt="Build Status"></a></li>
@@ -226,7 +223,6 @@
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -235,12 +231,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
