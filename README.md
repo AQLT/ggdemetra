@@ -25,15 +25,15 @@ recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release
 to the members of the European Statistical System (ESS) and the European
 System of Central Banks. RJDemetra implements the two leading seasonal
 adjustment methods
-[TRAMO/SEATS+](http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html)
-and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
+[TRAMO/SEATS+](http://gretl.sourceforge.net/tramo/tramo-seats.html) and
+[X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
 
 There are 4 main functionnalities in `ggdemetra` depending of what you
 want to add in the graphic:
 
   - `geom_sa()`: to add a time series compute during the seasonal
     adjustment (the trend, the seasonal adjusted time series, etc.).  
-  - `geom_outliers()`: to add the outliers used in the pre-adjustment
+  - `geom_outlier()`: to add the outliers used in the pre-adjustment
     process of the seasonal adjustment.
   - `geom_arima()`: to add the ARIMA model used in the pre-adjustment
     process of the seasonal adjustment.

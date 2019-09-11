@@ -108,14 +108,14 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>ggdemetra is an extension of <a href="https://github.com/tidyverse/ggplot2">ggplot2</a> to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with <a href="https://github.com/jdemetra/rjdemetra">RJDemetra</a> that is an R interface to <a href="https://github.com/jdemetra/jdemetra-app">JDemetra+</a>, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods <a href="http://www.bde.es/bde/en/secciones/servicios/Profesionales/Programas_estadi/Programas_estad_d9fa7f3710fd821.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
+<p>ggdemetra is an extension of <a href="https://github.com/tidyverse/ggplot2">ggplot2</a> to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with <a href="https://github.com/jdemetra/rjdemetra">RJDemetra</a> that is an R interface to <a href="https://github.com/jdemetra/jdemetra-app">JDemetra+</a>, the seasonal adjustment software <a href="https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf">officially recommended</a> to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods <a href="http://gretl.sourceforge.net/tramo/tramo-seats.html">TRAMO/SEATS+</a> and <a href="https://www.census.gov/srd/www/x13as/">X-12ARIMA/X-13ARIMA-SEATS</a>.</p>
 <p>There are 4 main functionnalities in <code>ggdemetra</code> depending of what you want to add in the graphic:</p>
 <ul>
 <li>
 <code><a href="reference/geom_sa.html">geom_sa()</a></code>: to add a time series compute during the seasonal adjustment (the trend, the seasonal adjusted time series, etc.).<br>
 </li>
 <li>
-<code>geom_outliers()</code>: to add the outliers used in the pre-adjustment process of the seasonal adjustment.</li>
+<code><a href="reference/geom_outlier.html">geom_outlier()</a></code>: to add the outliers used in the pre-adjustment process of the seasonal adjustment.</li>
 <li>
 <code><a href="reference/geom_arima.html">geom_arima()</a></code>: to add the ARIMA model used in the pre-adjustment process of the seasonal adjustment.</li>
 <li>
