@@ -5,7 +5,11 @@
 \alias{ipi_c_eu}
 \alias{ipi_c_eu_df}
 \title{Industrial Production Indices in manufacturing in the European Union}
-\format{A monthly \code{ts} object from january 1990 to december 2017 with 37 variables for \code{ipi_c_eu} and a \code{data.frame} for \code{ipi_c_eu_df}.}
+\format{
+A monthly \code{ts} object from january 1990 to december 2017 with 34 variables for \code{ipi_c_eu} and a \code{data.frame} for \code{ipi_c_eu_df}.
+
+An object of class \code{data.frame} with 360 rows and 35 columns.
+}
 \source{
 \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
 }
@@ -18,11 +22,8 @@ ipi_c_eu_df
 A dataset containing on monthly industrial production indices in manufacturing in the European Union (from sts_inpr_m dataset of Eurostat). Data are based 100 in 2015 and are unadjusted, i.e. neither seasonally adjusted nor calendar adjusted.
 }
 \details{
-The dataset contains 37 time series corresponding to the following geographical area
+The dataset contains 34 time series corresponding to the following geographical area
 \tabular{cl}{
-EU28      \tab European Union (current composition)            \cr
-EU27_2019 \tab European Union (without United Kingdom)         \cr
-EA19      \tab Euro area (19 countries)                        \cr
 BE        \tab Belgium                                         \cr
 BG        \tab Bulgaria                                        \cr
 CZ        \tab Czechia                                         \cr
@@ -52,6 +53,7 @@ FI        \tab Finland                                         \cr
 SE        \tab Sweden                                          \cr
 UK        \tab United Kingdom                                  \cr
 NO        \tab Norway                                          \cr
+CH        \tab Switzerland                                     \cr
 ME        \tab Montenegro                                      \cr
 MK        \tab Former Yugoslav Republic of Macedonia, the      \cr
 RS        \tab Serbia                                          \cr
