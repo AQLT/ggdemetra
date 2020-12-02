@@ -52,6 +52,7 @@ StatOutlier <- ggproto("StatOutlier", Stat,
                            label_outlier <- liste_outlier_name
                            if (coefficients) {
                                reg_coef <- RJDemetra::get_indicators(sa, "preprocessing.model.coefficients")[[1]][liste_outlier,1]
+                               reg_coef <- reg_coef[out_to_keep]
                                label_outlier <- sprintf(paste0("%s: %.",digits,"f"),
                                                         liste_outlier_name,
                                                         reg_coef)
