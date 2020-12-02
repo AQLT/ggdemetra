@@ -4,11 +4,22 @@
 \alias{geom_arima}
 \title{ARIMA model}
 \usage{
-geom_arima(mapping = NULL, data = NULL, stat = "arima",
-  geom = c("text", "label"), position = "identity", ...,
-  method = c("x13", "tramoseats"), spec = NULL, frequency = NULL,
-  message = TRUE, x_arima = NULL, y_arima = NULL, show.legend = NA,
-  inherit.aes = TRUE)
+geom_arima(
+  mapping = NULL,
+  data = NULL,
+  stat = "arima",
+  geom = c("text", "label"),
+  position = "identity",
+  ...,
+  method = c("x13", "tramoseats"),
+  spec = NULL,
+  frequency = NULL,
+  message = TRUE,
+  x_arima = NULL,
+  y_arima = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()} or
@@ -23,7 +34,7 @@ layer, as a string.}
 
 \item{geom}{character. The geometric to use to display the data:
 \code{GeomText} (\code{geom = "text"}, the default, see \link[ggplot2:geom_text]{geom_text()}) or
-\code{GeomLabel} (\code{geom = "label"}, see \link[ggplot2:geom_label]{geom_label()}).}
+\code{GeomLabel} (\code{geom = "label"}, see \link[ggplot2:geom_text]{geom_label()}).}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}

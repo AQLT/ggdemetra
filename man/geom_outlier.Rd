@@ -4,12 +4,24 @@
 \alias{geom_outlier}
 \title{Outliers texts}
 \usage{
-geom_outlier(mapping = NULL, data = NULL, stat = "outlier",
+geom_outlier(
+  mapping = NULL,
+  data = NULL,
+  stat = "outlier",
   geom = c("text", "label", "text_repel", "label_repel"),
-  position = "identity", ..., method = c("x13", "tramoseats"),
-  spec = NULL, frequency = NULL, message = TRUE, first_date = NULL,
-  last_date = NULL, coefficients = FALSE, digits = 1,
-  show.legend = NA, inherit.aes = TRUE)
+  position = "identity",
+  ...,
+  method = c("x13", "tramoseats"),
+  spec = NULL,
+  frequency = NULL,
+  message = TRUE,
+  first_date = NULL,
+  last_date = NULL,
+  coefficients = FALSE,
+  digits = 1,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()} or
@@ -24,18 +36,18 @@ layer, as a string.}
 
 \item{geom}{character. The geometric to use to display the data:
 \code{GeomText} (\code{geom = "text"}, the default, see \link[ggplot2:geom_text]{geom_text()});
-\code{GeomLabel} (\code{geom = "label"}, see \link[ggplot2:geom_label]{geom_label()});
+\code{GeomLabel} (\code{geom = "label"}, see \link[ggplot2:geom_text]{geom_label()});
 \code{GeomTextRepel} (\code{geom = "text_repel"}, the default, see \link[ggrepel:geom_text_repel]{geom_text_repel()});
-\code{GeomLabelRepel} (\code{geom = "label_repel"}, the default, see \link[ggrepel:geom_label_repel]{geom_label_repel()}).}
+\code{GeomLabelRepel} (\code{geom = "label_repel"}, the default, see \link[ggrepel:geom_text_repel]{geom_label_repel()}).}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
 \item{...}{Other arguments passed on to \link[ggplot2:layer]{layer()}. They may be parameters of
 \link[ggplot2:geom_text]{geom_text()} (if \code{geom = "text"}),
-\link[ggplot2:geom_label]{geom_label()} (if \code{geom = "label"}),
+\link[ggplot2:geom_text]{geom_label()} (if \code{geom = "label"}),
 \link[ggrepel:geom_text_repel]{geom_text_repel()} (if \code{geom = "text_repel"})
-or \link[ggrepel:geom_label_repel]{geom_label_repel()} (if \code{geom = "label_repel"}).}
+or \link[ggrepel:geom_text_repel]{geom_label_repel()} (if \code{geom = "label_repel"}).}
 
 \item{method}{the method used for the seasonal adjustment. \code{"x13"} (by default) for the X-13ARIMA method and \code{"tramoseats"} for TRAMO-SEATS.}
 
@@ -73,7 +85,7 @@ rather than combining with them.}
 Function to add directly to the plot the outliers used in the pre-adjustment process of the seasonal adjustment.
 }
 \details{
-With the parameter \code{geom = "text"}, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With \code{geom = "label"} a rectangle is drawn behind the names of the outliers, making them easier to read. The same with \code{geom = "text_repel"} or \code{geom = "label_repel"} but text labels are also repeled away from each other and away from the data points (see \link[ggrepel:geom_label_repel]{geom_label_repel()}).
+With the parameter \code{geom = "text"}, the outliers used in the pre-adjustment process of the seasonal adjustment are directly added to the plot. With \code{geom = "label"} a rectangle is drawn behind the names of the outliers, making them easier to read. The same with \code{geom = "text_repel"} or \code{geom = "label_repel"} but text labels are also repeled away from each other and away from the data points (see \link[ggrepel:geom_text_repel]{geom_label_repel()}).
 }
 \examples{
 p_sa_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +

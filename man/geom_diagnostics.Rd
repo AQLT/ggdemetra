@@ -4,11 +4,24 @@
 \alias{geom_diagnostics}
 \title{Table of diagnostics}
 \usage{
-geom_diagnostics(mapping = NULL, data = NULL, position = "identity",
-  ..., method = c("x13", "tramoseats"), spec = NULL,
-  frequency = NULL, message = TRUE, diagnostics = NULL, digits = 2,
-  xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf,
-  table_theme = ttheme_default(), inherit.aes = TRUE)
+geom_diagnostics(
+  mapping = NULL,
+  data = NULL,
+  position = "identity",
+  ...,
+  method = c("x13", "tramoseats"),
+  spec = NULL,
+  frequency = NULL,
+  message = TRUE,
+  diagnostics = NULL,
+  digits = 2,
+  xmin = -Inf,
+  xmax = Inf,
+  ymin = -Inf,
+  ymax = Inf,
+  table_theme = ttheme_default(),
+  inherit.aes = TRUE
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()} or
@@ -47,7 +60,7 @@ location of raster.}
 \item{ymin, ymax}{y location (in data coordinates) giving vertical
 location of raster.}
 
-\item{table_theme}{list of theme parameters for the table of diagnostics (see \link[gridExtra:ttheme_default]{ttheme_default()}).}
+\item{table_theme}{list of theme parameters for the table of diagnostics (see \link[gridExtra:tableGrob]{ttheme_default()}).}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them.}

@@ -5,15 +5,35 @@
 \alias{stat_sa}
 \title{Seasonal adjustment time series}
 \usage{
-geom_sa(mapping = NULL, data = NULL, stat = "sa",
-  position = "identity", ..., method = c("x13", "tramoseats"),
-  spec = NULL, frequency = NULL, message = TRUE, component = "sa",
-  show.legend = NA, inherit.aes = TRUE)
+geom_sa(
+  mapping = NULL,
+  data = NULL,
+  stat = "sa",
+  position = "identity",
+  ...,
+  method = c("x13", "tramoseats"),
+  spec = NULL,
+  frequency = NULL,
+  message = TRUE,
+  component = "sa",
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-stat_sa(mapping = NULL, data = NULL, geom = "line",
-  position = "identity", ..., method = c("x13", "tramoseats"),
-  spec = NULL, frequency = NULL, message = TRUE, component = "sa",
-  show.legend = NA, inherit.aes = TRUE)
+stat_sa(
+  mapping = NULL,
+  data = NULL,
+  geom = "line",
+  position = "identity",
+  ...,
+  method = c("x13", "tramoseats"),
+  spec = NULL,
+  frequency = NULL,
+  message = TRUE,
+  component = "sa",
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \link[ggplot2:aes]{aes()} or
