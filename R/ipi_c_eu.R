@@ -61,6 +61,6 @@
 # # # Last date is removed due to NA:
 # # ipi_c_eu <- window(ipi_c_eu, end = tail(time(ipi_c_eu),1) - 1/12)
 # ipi_c_eu_df <- ts2df(ipi_c_eu)
-# save(ipi_c_eu,file = "data/ipi_c_eu.rda")
-# save(ipi_c_eu_df,file = "data/ipi_c_eu_df.rda")
+# save(ipi_c_eu,file = "data/ipi_c_eu.rda", version = 2)
+# save(ipi_c_eu_df,file = "data/ipi_c_eu_df.rda", version = 2)
 
