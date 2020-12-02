@@ -9,7 +9,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  fig.align = "center"
+  fig.align = "center",
+  fig.dim = c(7,4)*1.4,
+  out.width = "100%"
 )
 ```
 
@@ -48,14 +50,15 @@ If you have troubles with the installation of RJDemetra, check the [installation
 
 ## Usage
 
-By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification "RSA5c"  (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment (it is the specification that has the most economic sense for the industrial production index).
+By default, the seasonal adjustment is made with X-13-ARIMA with the pre-defined specification "RSA5c"  (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). 
+If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify the specification once. 
+In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment (it is the specification that has the most economic sense for the industrial production index).
 
 To add the seasonal adjusted series and the forecasts of the input data and of the seasonal adjusted series:
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(ggdemetra)
 spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
-
 p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_line() +
     labs(title = "Seasonal adjustment of the French industrial production index",
@@ -76,7 +79,8 @@ p_sa +
                  vjust = 4,
                  ylim = c(NA, 65), force = 10,
                  arrow = arrow(length = unit(0.03, "npc"),
-                               type = "closed", ends = "last"))
+                               type = "closed", ends = "last"),
+                 digits = 2)
 ```
 
 To add the ARIMA model:
@@ -105,3 +109,10 @@ gridExtra::grid.arrange(p_sa, p_diag,
 
 
 See the [vignette](https://aqlt.github.io/ggdemetra/articles/ggdemetra.html) for more details.
+
+Note that `ts` objects cannot be directly used in `ggplot2`.
+To convert `ts` or `mts` object to `data.frame`, you can use the `ts2df()` function.
+For example, the data `ipi_c_eu_df` used in this package is obtained by applying the  `ts2df()`function to the `ipi_c_eu` data available in RJDemetra:
+```{r, eval = FALSE}
+ipi_c_eu_df <- ts2df(ipi_c_eu)
+```

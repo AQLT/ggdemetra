@@ -13,20 +13,27 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.height = 4,
-  fig.width = 7,
+  fig.dim = c(7,4)*1.4,
   out.width = "100%"
 )
 ```
 
 `ggdemetra` is an extension of `ggplot2` to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app), the seasonal adjustment software officially recommended to the members of the European Statistical System (ESS) and the European System of Central Banks. `RJDemetra` implements the two leading seasonal adjustment methods [TRAMO/SEATS+](http://gretl.sourceforge.net/tramo/tramo-seats.html) and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/srd/www/x13as/).
 
-There are 4 main functionnalities in `ggdemetra` depending of what you want to add in the graphic:
+There are 4 main functionalities in `ggdemetra` depending of what you want to add in the graphic:
 
 - `geom_sa()`: to add a time series compute during the seasonal adjustment (the trend, the seasonal adjusted time series, etc.).  
 - `geom_outliers()`: to add the outliers used in the pre-adjustment process of the seasonal adjustment.
 - `geom_arima()`: to add the ARIMA model used in the pre-adjustment process of the seasonal adjustment.
 - `geom_diagnostics()`: to add a table containing some diagnostics on the seasonal adjustment process.
+
+Note `ts` objects cannot be directly used in `ggplot2`.
+To convert `ts` or `mts` object to `data.frame`, you can use the `ts2df()` function.
+For example, the data `ipi_c_eu_df` used in this package is obtained by applying the  `ts2df()`function to the `ipi_c_eu` data available in RJDemetra:
+```{r, eval = FALSE}
+ipi_c_eu_df <- ts2df(ipi_c_eu)
+```
+
 
 # Seasonal adjustment specification
 
@@ -36,7 +43,11 @@ All the functions have some common parameters and especially those to defined th
 - `spec` is the seasonal adjustment specification. It can be the name of pre-defined specification (see `?RJDemetra::x13` or `?RJDemetra::tramoseats`) or a user-defined specification created by `RJDemetra` (by `RJDemetra::x13_spec` or `RJDemetra::tramoseats_spec`).  
 - `frequency` is the frequency of the input time series. By default, the frequency is computed and a message is printed with the one chosen (use `message = FALSE` to suppress this message).
 
-In the following examples, the data used is the French industrial production index. By default, the seasonal adjustment will then be processed with X-13ARIMA with a pre-defined specification `"RSA5c` (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). However, in the industrial production the working day effect has more economic sense than the trading day effect and a gradual effect for easter does not make economic sense for the aggregated series. The specification that should be used with X-13ARIMA is `spec = RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")`. If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify this parameter once.
+In the following examples, the data used is the French industrial production index. 
+By default, the seasonal adjustment will then be processed with X-13ARIMA with a pre-defined specification `"RSA5c` (automatic log detection, automatic ARIMA and outliers detection and trading day and easter adjustment). 
+However, in the industrial production the working day effect has more economic sense than the trading day effect and a gradual effect for easter does not make economic sense for the aggregated series. 
+The specification that should be used with X-13ARIMA is `spec = RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")`. 
+If no new data or seasonal adjustment specification is specified (method or specification), these parameters is inherited from the previous defined: therefore you only need to specify this parameter once.
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
