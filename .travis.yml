@@ -9,3 +9,6 @@ r:
 - devel
 
 r_check_args: --as-cran --run-donttest
+
+before_install:
+  - sudo $(which R) CMD javareconf
