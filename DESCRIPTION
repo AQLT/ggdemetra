@@ -3,7 +3,8 @@ Type: Package
 Title: 'ggplot2' Extension for Seasonal and Trading Day Adjustment with 'RJDemetra'
 Version: 0.2.2
 Authors@R: c(person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
-                 email = "alain.quartier@yahoo.fr"))
+                 email = "alain.quartier@yahoo.fr",
+                 comment = c(ORCID = "0000-0001-7890-3857")))
 Description: Provides 'ggplot2' functions to return the results of seasonal and trading day adjustment 
     made by 'RJDemetra'. 'RJDemetra' is an 'R' interface around 'JDemetra+' (<https://github.com/jdemetra/jdemetra-app>),
     the seasonal adjustment software officially recommended to the members of the European Statistical System and
