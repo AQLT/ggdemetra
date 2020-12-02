@@ -1,3 +1,11 @@
+# ggdemetra 0.2.2
+
+* `ts2df` function added to convert `ts` object to `data.frame`.
+
+* data updated.
+
+* `geom_outlier` bug correction (`first_date` and `last_date` not correctly working when `coefficients=TRUE`).
+
 # ggdemetra 0.2.1
 
 * `geom_arima` bug correction (a new model was computed).
