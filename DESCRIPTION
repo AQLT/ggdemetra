@@ -11,15 +11,15 @@ Description: Provides 'ggplot2' functions to return the results of seasonal and 
     the European System of Central Banks.
 Depends:
     R (>= 3.1.2), 
-    ggplot2 (>= 2.0.0)
-Imports:
+    ggplot2 (>= 2.0.0),
     RJDemetra (>= 0.1.2),
+Imports:
     ggrepel,
     gridExtra
 Suggests: 
     knitr,
     rmarkdown
-SystemRequirements: Java SE 8 or higher
+SystemRequirements: Java SE between 8 and 15.
 License: EUPL
 URL: https://github.com/AQLT/ggdemetra
 BugReports: https://github.com/AQLT/ggdemetra/issues

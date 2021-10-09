@@ -1,4 +1,5 @@
 #' @importFrom stats ts is.mts is.ts time
+#' @import RJDemetra
 seasonal_adjustment <- function(data,
                                 method = c("x13","tramoseats"),
                                 spec = NULL,

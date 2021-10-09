@@ -1,3 +1,9 @@
+# ggdemetra 0.2.3
+
+* Java version between 8 and 15 is required (RJDemetra compatibility).
+
+* `rjdmarkdown` now depends on `RJDemetra`.
+
 # ggdemetra 0.2.2
 
 * `ts2df` function added to convert `ts` object to `data.frame`.
