@@ -14,7 +14,7 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.os-name }}, R ${{ matrix.r }}, Java ${{ matrix.java }}
+    name: ${{ matrix.config.os-name }}, R ${{ matrix.config.r }}, Java ${{ matrix.config.java }}
 
     strategy:
       fail-fast: false
@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.config.java }}
 
       - uses: r-lib/actions/setup-r@v1
         with:
