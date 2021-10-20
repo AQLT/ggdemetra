@@ -26,9 +26,9 @@ jobs:
           - {os: macOS-latest, r: 'release', java: 12, os-name: macos}
           - {os: macOS-latest, r: 'devel', java: 12, os-name: macos}
           - {os: macOS-latest, r: 'oldrel', java: 12, os-name: macos}
-          - {os: ubuntu-20.04, r: 'release', java: 12,os-name: ubuntu}
-          - {os: ubuntu-20.04, r: 'devel', java: 12,os-name: ubuntu}
-          - {os: ubuntu-20.04, r: 'release', java: 16,os-name: ubuntu}
+          #- {os: ubuntu-20.04, r: 'release', java: 12,os-name: ubuntu}
+          #- {os: ubuntu-20.04, r: 'devel', java: 12,os-name: ubuntu}
+          #- {os: ubuntu-20.04, r: 'release', java: 16,os-name: ubuntu}
 
     steps:
       - uses: actions/checkout@v1
