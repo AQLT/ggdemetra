@@ -28,6 +28,8 @@ ts2df.mts <- function(x){
     date <- as.numeric(time(x))
     data <- as.matrix(x)
     rownames(data) <- NULL
-    data.frame(date = date,
+    result <- data.frame(date = date,
                data)
+    colnames(result) <- c("date", colnames(x))
+    result
 }
