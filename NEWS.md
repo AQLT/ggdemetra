@@ -1,8 +1,8 @@
 # ggdemetra 0.2.3
 
-* Java version between 8 and 15 is required (RJDemetra compatibility).
+* new functions: `autoplot.SA()` and `autoplot.jSA()` to plot 'RJDemetra' models and `y_forecast()`, ` trendcycle()`, ` seasonaladj()`, ` calendaradj()`, ` seasonal()`, ` irregular()`, ` calendar()` to extract different components of the models.
 
-* `rjdmarkdown` now depends on `RJDemetra`.
+* `ggdemetra` now depends on `RJDemetra`.
 
 # ggdemetra 0.2.2
 
