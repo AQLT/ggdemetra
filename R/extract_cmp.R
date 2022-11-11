@@ -96,9 +96,9 @@ calendaradj <- function(x, forecast = FALSE) {
 calendaradj.SA <- function(x, forecast = FALSE){
     y <- get_ts(x)
     if (inherits(x, "X13")) {
-        jmod <- jx13(y, x)
+        jmod <- jx13(y, x13_spec(x))
     } else {
-        jmod <- jtramoseats(y, x)
+        jmod <- jx13(y, tramoseats_spec(x))
     }
     calendaradj(jmod, forecast = forecast)
 }
@@ -120,9 +120,9 @@ calendar <- function(x, forecast = FALSE) {
 calendar.SA <- function(x, forecast = FALSE){
     y <- get_ts(x)
     if (inherits(x, "X13")) {
-        jmod <- jx13(y, x)
+        jmod <- jx13(y, x13_spec(x))
     } else {
-        jmod <- jtramoseats(y, x)
+        jmod <- jx13(y, tramoseats_spec(x))
     }
     calendar(jmod, forecast = forecast)
 }
@@ -143,9 +143,9 @@ y_forecast <- function(x) {
 y_forecast.SA <- function(x) {
     y <- get_ts(x)
     if (inherits(x, "X13")) {
-        jmod <- jx13(y, x)
+        jmod <- jx13(y, x13_spec(x))
     } else {
-        jmod <- jtramoseats(y, x)
+        jmod <- jx13(y, tramoseats_spec(x))
     }
     y_forecast(jmod)
 }
