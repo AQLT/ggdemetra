@@ -160,14 +160,14 @@ ggsiratioplot.default <- function(x, labels = NULL,
     labels <- data$labels
     data_plot <- data$data_plot
     data_means <- data$data_means
-    ggplot2::ggplot(data = data_plot, ggplot2::aes(x = x, group = cycle)) + 
-        ggplot2::geom_line(ggplot2::aes(y=s), colour=col.s, lwd = lwd.s) + 
-        ggplot2::geom_point(ggplot2::aes(y=si), colour=col.i, cex = cex.i) +
+    ggplot2::ggplot(data = data_plot, ggplot2::aes(x = x, group = cycle)) +
         ggplot2::geom_segment(ggplot2::aes(x=x0, y = y0,
                                            xend = x1, yend = y1),
                               data=data_means, 
                               colour=col.mean,
                               lwd = lwd.mean) + 
+        ggplot2::geom_line(ggplot2::aes(y=s), colour=col.s, lwd = lwd.s) + 
+        ggplot2::geom_point(ggplot2::aes(y=si), colour=col.i, cex = cex.i) + 
         ggplot2::labs(title = main, 
                       x = xlab, y = ylab) +
         ggplot2::scale_x_continuous(breaks = seq_along(labels), 
