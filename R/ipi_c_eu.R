@@ -42,7 +42,7 @@
 #' }
 #' @docType data
 #' @format A monthly \code{ts} object from january 1990 to december 2017 with 34 variables for \code{ipi_c_eu} and a \code{data.frame} for \code{ipi_c_eu_df}.
-#' @source \url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
+#' @source Eurostat, 'sts_inpr_m' database.
 "ipi_c_eu"
 #' @rdname ipi_c_eu
 "ipi_c_eu_df"

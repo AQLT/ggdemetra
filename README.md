@@ -20,7 +20,7 @@ adjustment statistics to your plots. The seasonal adjustment process is
 done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an
 R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
 the seasonal adjustment software [officially
-recommended](https://ec.europa.eu/eurostat/cros/system/files/Jdemetra_%20release.pdf)
+recommended](https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf)
 to the members of the European Statistical System (ESS) and the European
 System of Central Banks. RJDemetra implements the two leading seasonal
 adjustment methods

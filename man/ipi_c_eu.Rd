@@ -11,7 +11,7 @@ A monthly \code{ts} object from january 1990 to december 2017 with 34 variables 
 An object of class \code{data.frame} with 360 rows and 35 columns.
 }
 \source{
-\url{http://ec.europa.eu/eurostat/wdds/rest/data/v2.1/json/en/sts_inpr_m?nace_r2=C&precision=1&sinceTimePeriod=1980M01&unit=I15&s_adj=NSA}
+Eurostat, 'sts_inpr_m' database.
 }
 \usage{
 ipi_c_eu
