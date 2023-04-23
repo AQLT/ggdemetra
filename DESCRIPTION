@@ -1,7 +1,7 @@
 Package: ggdemetra
 Type: Package
 Title: 'ggplot2' Extension for Seasonal and Trading Day Adjustment with 'RJDemetra'
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
                  email = "alain.quartier@yahoo.fr",
                  comment = c(ORCID = "0000-0001-7890-3857")))
@@ -19,7 +19,7 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown
-SystemRequirements: Java JRE 8 or higher.
+SystemRequirements: Java (>= 8)
 License: EUPL
 URL: https://github.com/AQLT/ggdemetra
 BugReports: https://github.com/AQLT/ggdemetra/issues
