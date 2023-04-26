@@ -14,30 +14,19 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgre
 
 ## Overview
 
-ggdemetra is an extension of
-[ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal
-adjustment statistics to your plots. The seasonal adjustment process is
-done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an
-R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
-the seasonal adjustment software [officially
-recommended](https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf)
-to the members of the European Statistical System (ESS) and the European
-System of Central Banks. RJDemetra implements the two leading seasonal
-adjustment methods
-[TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and
-[X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
+ggdemetra is an extension of [ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app), the seasonal adjustment software [officially recommended](<https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf>) to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
 
 There are 4 main functionnalities in `ggdemetra` depending of what you
 want to add in the graphic:
 
--   `geom_sa()`: to add a time series compute during the seasonal
-    adjustment (the trend, the seasonal adjusted time series, etc.).  
--   `geom_outlier()`: to add the outliers used in the pre-adjustment
-    process of the seasonal adjustment.
--   `geom_arima()`: to add the ARIMA model used in the pre-adjustment
-    process of the seasonal adjustment.
--   `geom_diagnostics()`: to add a table containing some diagnostics on
-    the seasonal adjustment process.
+- `geom_sa()`: to add a time series compute during the seasonal
+  adjustment (the trend, the seasonal adjusted time series, etc.).  
+- `geom_outlier()`: to add the outliers used in the pre-adjustment
+  process of the seasonal adjustment.
+- `geom_arima()`: to add the ARIMA model used in the pre-adjustment
+  process of the seasonal adjustment.
+- `geom_diagnostics()`: to add a table containing some diagnostics on
+  the seasonal adjustment process.
 
 ## Installation
 
@@ -89,7 +78,7 @@ p_sa <- p_ipi_fr +
 p_sa
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-sa-1.png" width="100%" style="display: block; margin: auto;" />
 
 To add the outliers at the bottom of the plot with an arrow to the data
 point and the estimated coefficients:
@@ -105,7 +94,7 @@ p_sa +
                  digits = 2)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-sa-out-1.png" width="100%" style="display: block; margin: auto;" />
 
 To add the ARIMA model:
 
@@ -116,7 +105,7 @@ p_sa +
                vjust = -1, hjust = -0.1)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-sa-arima-1.png" width="100%" style="display: block; margin: auto;" />
 
 To add a table of diagnostics below the plot:
 
@@ -132,9 +121,14 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
+#> Warning: The following aesthetics were dropped during statistical transformation: x, y
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-sa-diag-1.png" width="100%" style="display: block; margin: auto;" />
 
 See the
 [vignette](https://aqlt.github.io/ggdemetra/articles/ggdemetra.html) for

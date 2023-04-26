@@ -24,7 +24,10 @@ knitr::opts_chunk$set(
 [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 
 ## Overview
-ggdemetra is an extension of [ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app), the seasonal adjustment software [officially recommended](https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf) to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
+
+```{=markdown}
+ggdemetra is an extension of [ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal adjustment statistics to your plots. The seasonal adjustment process is done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app), the seasonal adjustment software [officially recommended](<https://cros-legacy.ec.europa.eu/system/files/Jdemetra_ release.pdf>) to the members of the European Statistical System (ESS) and the European System of Central Banks. RJDemetra implements the two leading seasonal adjustment methods [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
+```
 
 There are 4 main functionnalities in `ggdemetra` depending of what you want to add in the graphic:
 
@@ -55,7 +58,7 @@ If no new data or seasonal adjustment specification is specified (method or spec
 In the following examples, the seasonal adjustment will be perform with X-13-ARIMA with working day adjustment and no gradual easter effect adjustment (it is the specification that has the most economic sense for the industrial production index).
 
 To add the seasonal adjusted series and the forecasts of the input data and of the seasonal adjusted series:
-```{r, warning=FALSE, message=FALSE}
+```{r sa, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(ggdemetra)
 spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
@@ -72,7 +75,7 @@ p_sa
 ```
 
 To add the outliers at the bottom of the plot with an arrow to the data point and the estimated coefficients:
-```{r}
+```{r sa-out}
 p_sa + 
     geom_outlier(geom = "label_repel",
                  coefficients = TRUE,
@@ -85,7 +88,7 @@ p_sa +
 
 To add the ARIMA model:
 
-```{r}
+```{r sa-arima}
 p_sa + 
     geom_arima(geom = "label",
                x_arima = -Inf, y_arima = -Inf, 
@@ -93,7 +96,7 @@ p_sa +
 ```
 
 To add a table of diagnostics below the plot:
-```{r}
+```{r sa-diag}
 diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
                  `Residual qs-test (p-value)` = "diagnostics.qs",
                  `Residual f-test (p-value)` = "diagnostics.ftest")
