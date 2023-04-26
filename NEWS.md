@@ -1,4 +1,4 @@
-# ggdemetra 0.2.4
+# ggdemetra 0.2.5
 
 * new functions: `siratio()`, `siratioplot()` and `ggsiratioplot()` to plot SI ratios.
 
