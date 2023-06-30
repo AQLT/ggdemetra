@@ -52,7 +52,7 @@ siratio.jSA <- function(x, ...){
         if (mode == "Additive"){
             res[[1]] <- res[[1]] + res[[2]]
         } else {
-            res[[1]] <- res[[1]] * res[[2]]
+            res[[2]] <- res[[1]] * res[[2]]
         }
     }
     if (is.null(res[[1]])) # neither X-13 nor TRAMO-SEATS

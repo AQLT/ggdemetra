@@ -1,3 +1,8 @@
+# ggdemetra 0.2.6
+
+* `siratio()` correction with TRAMO-SEATS `"jSA"` models.
+
+
 # ggdemetra 0.2.5
 
 * new functions: `siratio()`, `siratioplot()` and `ggsiratioplot()` to plot SI ratios.
