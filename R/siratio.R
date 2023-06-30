@@ -47,7 +47,7 @@ siratio.jSA <- function(x, ...){
     
     if (is.null(res[[1]])) {
         # TRAMO-SEATS model
-        res <- RJDemetra::get_indicators(x, c("decomposition.i", "decomposition.s"))
+        res <- RJDemetra::get_indicators(x, c("decomposition.i_cmp", "decomposition.s_cmp"))
         mode <- RJDemetra::get_indicators(x, "mode")[[1]]
         if (mode == "Additive"){
             res[[1]] <- res[[1]] + res[[2]]
