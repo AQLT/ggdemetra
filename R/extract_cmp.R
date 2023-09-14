@@ -134,10 +134,35 @@ calendar.jSA <- function(x, forecast = FALSE){
         get_indicators(x, "preprocessing.model.cal")[[1]]
     }
 }
+
+#' @rdname components
+#' @export
+raw <- function(x, forecast = FALSE) {
+    UseMethod("raw", x)
+}
+#' @export
+raw.SA <- function(x, forecast = FALSE){
+    if (forecast) {
+        x$final$forecasts[,"y_f"]
+    } else {
+        x$final$series[,"y"]
+    }
+}
+#' @export
+raw.jSA <- function(x, forecast = FALSE){
+    if (forecast) {
+        get_indicators(x, "y_f")[[1]]
+    } else {
+        get_indicators(x, "y")[[1]]
+    }
+}
+
 #' @rdname components
 #' @export
 y_forecast <- function(x) {
-    UseMethod("y_forecast", x)
+    .Deprecated("raw", "ggdemetra")
+    raw(x, forecast = TRUE)
+    # UseMethod("y_forecast", x)
 }
 #' @export
 y_forecast.SA <- function(x) {
