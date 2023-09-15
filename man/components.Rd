@@ -9,7 +9,6 @@
 \alias{calendaradj}
 \alias{calendar}
 \alias{raw}
-\alias{y_forecast}
 \title{Extract Component from 'RJDemetra' model}
 \usage{
 seasonal(x, forecast = FALSE)
@@ -25,8 +24,6 @@ calendaradj(x, forecast = FALSE)
 calendar(x, forecast = FALSE)
 
 raw(x, forecast = FALSE)
-
-y_forecast(x)
 }
 \arguments{
 \item{x}{a \code{"SA"} or \code{"jSA"} model.}

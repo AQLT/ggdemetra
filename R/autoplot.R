@@ -43,11 +43,11 @@ autoplot_rjd <- function(object,
         names(components_) <- components_
     }
     names(components_)[names(components_) == ""] <- components_[names(components_) == ""]
-    data <- ts.union(get_ts(object), trendcycle(object), 
+    data <- ts.union(raw(object), trendcycle(object), 
                      seasonaladj(object), calendaradj(object), 
                      seasonal(object), irregular(object), calendar(object))
     
-    data_f <- ts.union(y_forecast(object), trendcycle(object, forecast = TRUE), 
+    data_f <- ts.union(raw(object, forecast = TRUE), trendcycle(object, forecast = TRUE), 
                        seasonaladj(object, forecast = TRUE), calendaradj(object, forecast = TRUE), 
                        seasonal(object, forecast = TRUE), irregular(object, forecast = TRUE), 
                        calendar(object, forecast = TRUE))

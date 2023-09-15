@@ -157,24 +157,15 @@ raw.jSA <- function(x, forecast = FALSE){
     }
 }
 
-#' @rdname components
+#' Deprecated functions
+#'
+#' @description
+#' Use \code{\link{raw}} with parameter \code{forecast = TRUE} instead of \code{y_forecast}.
+#'
+#' @inheritParams components
+#' @name deprecated-ggdemetra
 #' @export
 y_forecast <- function(x) {
     .Deprecated("raw", "ggdemetra")
     raw(x, forecast = TRUE)
-    # UseMethod("y_forecast", x)
-}
-#' @export
-y_forecast.SA <- function(x) {
-    y <- get_ts(x)
-    if (inherits(x, "X13")) {
-        jmod <- jx13(y, x13_spec(x))
-    } else {
-        jmod <- jx13(y, tramoseats_spec(x))
-    }
-    y_forecast(jmod)
-}
-#' @export
-y_forecast.jSA <- function(x) {
-    get_indicators(x, "y_f")[[1]]
 }
