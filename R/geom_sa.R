@@ -39,7 +39,9 @@ StatSa <- ggproto("StatSa", Stat,
 )
 #' Seasonal adjustment time series
 #' 
-#' Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. `geom_sa()` and `stat_sa()` are  aliases: they both use the same arguments. Use `stat_sa()` if you want to display the results with a non-standard geom.
+#' Performs a seasonal adjustment and plots a time series. 
+#' `geom_sa()` and `stat_sa()` are  aliases: they both use the same arguments. 
+#' Use `stat_sa()` if you want to display the results with a non-standard geom.
 #' 
 #' @param mapping Set of aesthetic mappings created by [aes()][ggplot2::aes] or
 #'   [aes_()][ggplot2::aes_]. If specified and `inherit.aes = TRUE` (the

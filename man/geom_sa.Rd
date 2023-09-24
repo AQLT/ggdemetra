@@ -79,7 +79,9 @@ rather than combining with them.}
 \item{geom}{The geometric object to use to display the data}
 }
 \description{
-Performs a seasonal adjustment and plots a time seriesAids the eye in seeing patterns in the presence of overplotting. \code{geom_sa()} and \code{stat_sa()} are  aliases: they both use the same arguments. Use \code{stat_sa()} if you want to display the results with a non-standard geom.
+Performs a seasonal adjustment and plots a time series.
+\code{geom_sa()} and \code{stat_sa()} are  aliases: they both use the same arguments.
+Use \code{stat_sa()} if you want to display the results with a non-standard geom.
 }
 \examples{
 p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
