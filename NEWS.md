@@ -2,7 +2,9 @@
 
 * `siratio()` correction with TRAMO-SEATS `"jSA"` models.
 
-* `y_forecast()` replaces by `raw()`
+* `y_forecast()` replaced by `raw()`.
+
+* new `init_ggplot()` function.
 
 # ggdemetra 0.2.5
 

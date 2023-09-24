@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.dim = c(7,4)*1.4,
-  out.width = "100%"
+  out.width = "100%",
+  warning = FALSE
 )
 ```
 
@@ -71,18 +72,19 @@ By default `geom_sa()` adds the seasonal adjusted time series:
 ```{r}
 spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
 p_ipi_fr +
-    geom_sa(color = "red",
+    geom_sa(color = "#155692",
             spec = spec)
 ```
 
-To add other components of the seasonal adjustment, use the `component` parameter of `geom_sa()` (see `?RJDemetra::user_defined_variables()` for the availables parameters). For example, to add the forecasts of the input data and of the seasonal adjusted series:
+To add other components of the seasonal adjustment, use the `component` parameter of `geom_sa()` (see `?RJDemetra::user_defined_variables()` for the availables parameters). 
+For example, to add the forecasts of the input data and of the seasonal adjusted series:
 
 ```{r}
 p_sa <- p_ipi_fr +
     geom_sa(component = "y_f", linetype = 2, message = FALSE,
             spec = spec) + 
-    geom_sa(component = "sa", color = "red") +
-    geom_sa(component = "sa_f", color = "red", linetype = 2)
+    geom_sa(component = "sa", color = "#155692") +
+    geom_sa(component = "sa_f", color = "#155692", linetype = 2)
 p_sa
 ```
 
@@ -103,27 +105,26 @@ They can be plotted in more readable way using the parameters of `ggrepel::geom_
 ```{r}
 p_sa + 
     geom_outlier(geom = "label_repel",
-                 vjust = 4,
-                 ylim = c(NA, 65), force = 10,
+                 ylim = c(NA, 65), 
                  arrow = arrow(length = unit(0.03, "npc"),
                                type = "closed", ends = "last"))
 ```
 
-Use the parameters `first_date` and `last_date` to only have the outliers in a precise time interval. For example, to only plot the outliers from 2009 use `first_date = 2009`:
+Use the parameters `first_date` and `last_date` to only have the outliers in a precise time interval. 
+For example, to only plot the outliers from 2009 use `first_date = 2009`:
 ```{r}
 p_sa + 
     geom_outlier(geom = "label_repel",
                  first_date = 2009,
-                 vjust = 4,
-                 ylim = c(NA, 65), force = 10,
+                 ylim = c(NA, 65), 
                  arrow = arrow(length = unit(0.03, "npc"),
                                type = "closed", ends = "last"))
 ```
 
 # Add the ARIMA model
 
-The ARIMA model used pre-adjustment process can be added to the plot with `geom_
-arima()`. The parameter `geom = "label"` draws a rectangle behind the ARIMA model, making it easier to read:
+The ARIMA model used pre-adjustment process can be added to the plot with `geom_arima()`. 
+The parameter `geom = "label"` draws a rectangle behind the ARIMA model, making it easier to read:
 
 ```{r}
 p_sa + 
@@ -134,7 +135,9 @@ p_sa +
 
 # Add a table with some diagnostics
 
-A table with some diagnostics on the seasonal adjustment process can be added with `geom_diagnostics()`. The  desired diagnostics have to be added to the `diagnostics` parameter (see `?RJDemetra::user_defined_variables()` for the availables diagnostics). For example, to add the result of the X-11 combined test and the p-values of the residual seasonality qs and f tests:
+A table with some diagnostics on the seasonal adjustment process can be added with `geom_diagnostics()`. 
+The  desired diagnostics have to be added to the `diagnostics` parameter (see `?RJDemetra::user_defined_variables()` for the availables diagnostics).
+For example, to add the result of the X-11 combined test and the p-values of the residual seasonality qs and f tests:
 
 ```{r}
 diagnostics <- c("diagnostics.combined.all.summary", "diagnostics.qs", "diagnostics.ftest")
@@ -168,4 +171,55 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR))  +
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
+```
+
+# Use existing model
+
+ggdemetra offers several function that can be used to manipulate existing models.
+
+```{r mod}
+mod <- RJDemetra::x13(ipi_c_eu[,"UK"], spec)
+```
+
+The previous plots can be initialized with the `init_ggplot()` function:
+
+```{r init-ggplot}
+init_ggplot(mod) + 
+    geom_line(color =  "#F0B400") +
+    geom_sa(color =  "#155692") +
+    geom_arima(geom = "label",
+               x_arima = -Inf, y_arima = -Inf, 
+               vjust = -1, hjust = -0.1)
+```
+
+The different components of seasonal adjustment models can be extracted through  `calendar()`, `calendaradj()`, `irregular()`, `trendcycle()`, `seasonal()`, `seasonaladj()`, `trendcycle()` and `raw()`.
+
+```{r sa-init}
+data <- ts.union(raw(mod), raw(mod, forecast = TRUE),
+                 trendcycle(mod), trendcycle(mod, forecast = TRUE),
+                 seasonaladj(mod), seasonaladj(mod, forecast = TRUE))
+colnames(data) <- c("y", "y_f",
+                    "t", "t_f",
+                    "sa", "sa_f")
+ggplot(data = ts2df(data), mapping = aes(x = date)) +
+    geom_line(mapping = aes(y = y), color =  "#F0B400", na.rm = TRUE) +
+    geom_line(mapping = aes(y = y_f), color =  "#F0B400", na.rm = TRUE, linetype = 2) +
+    geom_line(mapping = aes(y = t), color =  "#1E6C0B", na.rm = TRUE) +
+    geom_line(mapping = aes(y = t_f), color =  "#1E6C0B", na.rm = TRUE, linetype = 2) +
+    geom_line(mapping = aes(y = sa), color =  "#155692", na.rm = TRUE) +
+    geom_line(mapping = aes(y = sa_f), color =  "#155692", na.rm = TRUE, linetype = 2) +
+    theme_bw()
+```
+
+
+SI-ratio plots can be plotted with `siratioplot` and `ggsiratioplot`:
+
+```{r ggsiratio}
+ggsiratioplot(mod)
+```
+
+And there is also an `autoplot()` function:
+
+```{r autoplot}
+autoplot(mod)
 ```
