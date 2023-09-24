@@ -16,10 +16,10 @@
 #' 
 #' @examples 
 #' p_sa_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
-#'     geom_line() +
+#'     geom_line(color =  "#F0B400") +
 #'     labs(title = "Seasonal adjustment of the French industrial production index",
 #'          x = "time", y = NULL) +
-#'     geom_sa(color = "red", message = FALSE)
+#'     geom_sa(color = "#155692", message = FALSE)
 #' 
 #' # To add of diagnostics with result of the X-11 combined test and the p-values 
 #' # of the residual seasonality qs and f tests:

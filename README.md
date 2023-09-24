@@ -67,14 +67,14 @@ library(ggplot2)
 library(ggdemetra)
 spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
 p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
-    geom_line() +
+    geom_line(color =  "#F0B400") +
     labs(title = "Seasonal adjustment of the French industrial production index",
          x = NULL, y = NULL)
 p_sa <- p_ipi_fr +
     geom_sa(component = "y_f", linetype = 2,
-            spec = spec) + 
-    geom_sa(component = "sa", color = "red") +
-    geom_sa(component = "sa_f", color = "red", linetype = 2)
+            spec = spec, color =  "#F0B400") + 
+    geom_sa(component = "sa", color = "#155692") +
+    geom_sa(component = "sa_f", color = "#155692", linetype = 2)
 p_sa
 ```
 
@@ -87,8 +87,7 @@ point and the estimated coefficients:
 p_sa + 
     geom_outlier(geom = "label_repel",
                  coefficients = TRUE,
-                 vjust = 4,
-                 ylim = c(NA, 65), force = 10,
+                 ylim = c(NA, 65), 
                  arrow = arrow(length = unit(0.03, "npc"),
                                type = "closed", ends = "last"),
                  digits = 2)
@@ -121,11 +120,6 @@ p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     
 gridExtra::grid.arrange(p_sa, p_diag,
              nrow = 2, heights  = c(4, 1.5))
-#> Warning: The following aesthetics were dropped during statistical transformation: x, y
-#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
-#>   the data.
-#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-#>   variable into a factor?
 ```
 
 <img src="man/figures/README-sa-diag-1.png" width="100%" style="display: block; margin: auto;" />
@@ -144,12 +138,40 @@ available in RJDemetra:
 ipi_c_eu_df <- ts2df(ipi_c_eu)
 ```
 
-‘RJDemetra’ models can also be automatically plotted with the function
-`autoplot()`:
+## Existing models
+
+ggdemetra offers several function that can be used to manipulate
+existing models.
+
+The different components of seasonal adjustment models can also be
+extracted through `calendar()`, `calendaradj()`, `irregular()`,
+`trendcycle()`, `seasonal()`, `seasonaladj()`, `trendcycle()` and
+`raw()`.
+
+If you already have a seasonally adjusted model you can also used the
+function `init_ggplot()` :
 
 ``` r
-x = RJDemetra::jx13(ipi_c_eu[,"FR"])
-autoplot(x)
+mod <- RJDemetra::x13(ipi_c_eu[,"FR"], spec)
+init_ggplot(mod) +
+    geom_line(color =  "#F0B400") +
+    geom_sa(component = "sa", color = "#155692")
+```
+
+<img src="man/figures/README-sa-init-1.png" width="100%" style="display: block; margin: auto;" />
+
+There is also an `autoplot()` function:
+
+``` r
+autoplot(mod)
 ```
 
 <img src="man/figures/README-autoplot-1.png" width="100%" style="display: block; margin: auto;" />
+
+SI-ratio plots can be plotted with `siratioplot` and `ggsiratioplot`:
+
+``` r
+ggsiratioplot(mod)
+```
+
+<img src="man/figures/README-ggsiratio-1.png" width="100%" style="display: block; margin: auto;" />
