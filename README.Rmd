@@ -69,7 +69,7 @@ p_ipi_fr <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
          x = NULL, y = NULL)
 p_sa <- p_ipi_fr +
     geom_sa(component = "y_f", linetype = 2,
-            spec = spec, color =  "#F0B400") + 
+            spec = spec, frequency = 12, color =  "#F0B400") + 
     geom_sa(component = "sa", color = "#155692") +
     geom_sa(component = "sa_f", color = "#155692", linetype = 2)
 p_sa
@@ -103,7 +103,7 @@ diagnostics <- c(`Combined test` = "diagnostics.combined.all.summary",
 p_diag <- ggplot(data = ipi_c_eu_df, mapping = aes(x = date, y = FR)) +
     geom_diagnostics(diagnostics = diagnostics,
                      table_theme = gridExtra::ttheme_default(base_size = 8),
-                     message = FALSE) + 
+                     spec = spec, frequency = 12) + 
     theme_void()
     
 gridExtra::grid.arrange(p_sa, p_diag,
@@ -128,6 +128,7 @@ The different components of seasonal adjustment models can be extracted through 
 
 If you already have a seasonally adjusted model you can also used the function `init_ggplot()` :
 ```{r sa-init}
+spec <- RJDemetra::x13_spec("RSA3", tradingdays.option = "WorkingDays")
 mod <- RJDemetra::x13(ipi_c_eu[,"FR"], spec)
 init_ggplot(mod) +
     geom_line(color =  "#F0B400") +
