@@ -7,6 +7,7 @@
 #' @param cex.i,lwd.s,lwd.mean graphical parameters.
 #' @param xlim,ylim X and Y axis limits.
 #' @param main,xlab,ylab title, X and Y axis label.
+#' @param start,end first and last dates plotted.
 #' @param ... unused parameters.
 #' 
 #' @examples 
@@ -52,7 +53,7 @@ siratio.jSA <- function(x, ...){
         if (mode == "Additive"){
             res[[1]] <- res[[1]] + res[[2]]
         } else {
-            res[[2]] <- res[[1]] * res[[2]]
+            res[[1]] <- res[[1]] * res[[2]]
         }
     }
     if (is.null(res[[1]])) # neither X-13 nor TRAMO-SEATS
@@ -72,6 +73,7 @@ siratioplot <- function(x, labels = NULL,
                         main = "SI ratio",
                         xlab = NULL, ylab = NULL,
                         xlim = NULL, ylim = NULL,
+                        start = NULL, end = NULL,
                         ...) {
     UseMethod("siratioplot", x)
 }
@@ -92,7 +94,9 @@ siratioplot.default <- function(x, labels = NULL,
                                 main = "SI ratio",
                                 xlab = NULL, ylab = NULL,
                                 xlim = NULL, ylim = NULL,
+                                start = NULL, end = NULL,
                                 ...) {
+    x <- stats::window(x, start = start, end = end)
     data <- data_siratio(x, labels = labels)
     labels <- data$labels
     data_plot <- data$data_plot
@@ -137,6 +141,7 @@ ggsiratioplot <- function(x, labels = NULL,
                           lwd.s = 1, lwd.mean = lwd.s,
                           main = "SI ratio",
                           xlab = NULL, ylab = NULL,
+                          start = NULL, end = NULL,
                           ...) {
     UseMethod("ggsiratioplot", x)
 }
@@ -155,7 +160,9 @@ ggsiratioplot.default <- function(x, labels = NULL,
                                   lwd.s = NULL, lwd.mean = lwd.s,
                                   main = "SI ratio",
                                   xlab = NULL, ylab = NULL,
+                                  start = NULL, end = NULL,
                                   ...) {
+    x <- stats::window(x, start = start, end = end)
     data <- data_siratio(x, labels = labels)
     labels <- data$labels
     data_plot <- data$data_plot

@@ -24,6 +24,8 @@ siratioplot(
   ylab = NULL,
   xlim = NULL,
   ylim = NULL,
+  start = NULL,
+  end = NULL,
   ...
 )
 
@@ -39,6 +41,8 @@ ggsiratioplot(
   main = "SI ratio",
   xlab = NULL,
   ylab = NULL,
+  start = NULL,
+  end = NULL,
   ...
 )
 }
@@ -60,6 +64,8 @@ ggsiratioplot(
 \item{main, xlab, ylab}{title, X and Y axis label.}
 
 \item{xlim, ylim}{X and Y axis limits.}
+
+\item{start, end}{first and last dates plotted.}
 }
 \description{
 SI-ratio
