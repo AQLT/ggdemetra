@@ -158,7 +158,7 @@ StatDiagnostics <- ggproto("StatDiagnostics", Stat,
                            }
                            diag_table <- data.frame(Diagnostic =
                                                         diag_names,
-                                                    Value = diag_table)
+                                                    Value = diag_table, x = 0, y = 0)
                            diag_table
                        }
 )
