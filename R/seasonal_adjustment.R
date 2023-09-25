@@ -6,20 +6,18 @@ seasonal_adjustment <- function(data,
                                 frequency = NULL,
                                 message = TRUE,
                                 new_data = TRUE){
-    method <- match.arg(method)
     data <- data[order(data$x), ]
     
     use_previous_model <- pre_check_param(frequency = frequency, method = method,
-                                  spec = spec, new_data = new_data,
-                                  data_y = data$y)
-
+                                          spec = spec, new_data = new_data,
+                                          data_y = data$y)
     if(use_previous_model){
         sa <- .demetra$sa
         data_ts <- .demetra$data_ts
     }else{
         data_ts <- .demetra$data_ts <-
             dataframe2ts(data = data, frequency = frequency, message = message)
-        
+        method <- match.arg(method)
         if (method == "x13") {
             if (is.null(spec)) {
                 sa <- RJDemetra::jx13(data_ts)
@@ -111,11 +109,11 @@ pre_check_param <- function(frequency = NULL,
             NULL
         return(use_previous_model)
     }
-        
-    method <- match.arg(method)
+
+    # method <- match.arg(method)
 
     if((is.null(spec) || identical(spec, .demetra$spec)) & 
-       (is.null(method) || identical(method, .demetra$method)) & 
+       (is.null(method) || .demetra$method %in% method) & 
        (is.null(frequency) || identical(frequency, .demetra$frequency)) & 
        (identical(data_y, .demetra$data_y))){
         use_previous_model <- TRUE
