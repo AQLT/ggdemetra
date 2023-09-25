@@ -12,3 +12,4 @@ cran-comments.md
 TODO.R
 Exemples.R
 ^\.github$
+^reconf.sh$
