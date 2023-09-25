@@ -134,6 +134,7 @@ StatDiagnostics <- ggproto("StatDiagnostics", Stat,
                                                          message = message,
                                                          new_data = new_data)
                            data <- result[["data"]]
+                           first_data <- data[1, c("x", "y")]
                            sa <- result[["sa"]]
                            frequency <- result[["frequency"]]
 
@@ -158,7 +159,8 @@ StatDiagnostics <- ggproto("StatDiagnostics", Stat,
                            }
                            diag_table <- data.frame(Diagnostic =
                                                         diag_names,
-                                                    Value = diag_table, x = 0, y = 0)
+                                                    Value = diag_table,
+                                                    x = first_data[1], y = first_data[2])
                            diag_table
                        }
 )
