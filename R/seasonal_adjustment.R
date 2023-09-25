@@ -53,7 +53,7 @@ dataframe2ts <- function(data, frequency = NULL, message = TRUE){
         if (is.null(frequency)) {
             frequency <- max(table(years))
             if (message)
-                message(sprintf("Frenquency used: %i", frequency))
+                message(sprintf("Frequency used: %i", frequency))
         }
         dates <- years + (months - 1) / frequency
         first_date <- dates[1]
@@ -63,7 +63,7 @@ dataframe2ts <- function(data, frequency = NULL, message = TRUE){
             years <- trunc(round(dates, 3))
             frequency <- max(table(years))
             if (message)
-                message(sprintf("Frenquency used: %i", frequency))
+                message(sprintf("Frequency used: %i", frequency))
         }
         first_date <- dates[1]
     }
