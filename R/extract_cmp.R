@@ -156,16 +156,3 @@ raw.jSA <- function(x, forecast = FALSE){
         get_indicators(x, "y")[[1]]
     }
 }
-
-#' Deprecated functions
-#'
-#' @description
-#' Use \code{\link{raw}} with parameter \code{forecast = TRUE} instead of \code{y_forecast}.
-#'
-#' @inheritParams components
-#' @name deprecated-ggdemetra
-#' @export
-y_forecast <- function(x) {
-    .Deprecated("raw", "ggdemetra")
-    raw(x, forecast = TRUE)
-}
