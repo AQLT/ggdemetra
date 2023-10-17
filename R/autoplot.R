@@ -58,7 +58,7 @@ autoplot_rjd <- function(object,
     }
     names(components_)[names(components_) == ""] <- components_[names(components_) == ""]
 
-    data <- ts.union(sapply(components_, extract_component, x13sa, FALSE))
+    data <- ts.union(sapply(components_, extract_component, object, FALSE))
     colnames(data) <- names(components_)
     
     data_plot <- data.frame(date = rep(time(data), ncol(data)),
@@ -71,7 +71,7 @@ autoplot_rjd <- function(object,
          ggplot2::geom_line()
 
     if (forecast) {
-      data_f <- ts.union(sapply(components_, extract_component, x13sa, forecast))
+      data_f <- ts.union(sapply(components_, extract_component, object, forecast))
       colnames(data_f) <- names(components_)
       data_f_plot <- data.frame(date = rep(time(data_f), ncol(data_f)),
                             y = c(data_f), 
