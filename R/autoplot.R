@@ -32,6 +32,20 @@ autoplot.jSA <- function(object,
                  forecast = forecast, 
                  ...)
 }
+
+
+extract_component <- function(component, object, forcecast) {
+  switch(component,
+    "y" = raw(object, forcecast),
+    "t" = trendcycle(object, forcecast),
+    "sa" = seasonaladj(object, forcecast),
+    "y_cal" = calendaradj(object, forcecast),
+    "s" = seasonal(object, forcecast),
+    "i" = irregular(object, forcecast),
+    "cal" = calendar(object, forcecast)
+  )
+}
+
 autoplot_rjd <- function(object, 
                          components = c("y", "sa", "trend" = "t", "seasonal" = "s", "irregular" = "i"), 
                          forecast = FALSE, ...) {
@@ -43,34 +57,31 @@ autoplot_rjd <- function(object,
         names(components_) <- components_
     }
     names(components_)[names(components_) == ""] <- components_[names(components_) == ""]
-    data <- ts.union(raw(object), trendcycle(object), 
-                     seasonaladj(object), calendaradj(object), 
-                     seasonal(object), irregular(object), calendar(object))
+
+    data <- ts.union(sapply(components_, extract_component, x13sa, FALSE))
+    colnames(data) <- names(components_)
     
-    data_f <- ts.union(raw(object, forecast = TRUE), trendcycle(object, forecast = TRUE), 
-                       seasonaladj(object, forecast = TRUE), calendaradj(object, forecast = TRUE), 
-                       seasonal(object, forecast = TRUE), irregular(object, forecast = TRUE), 
-                       calendar(object, forecast = TRUE))
-    colnames(data) <- colnames(data_f) <- c("y", "t", "sa", "y_cal", "s", "i", "cal")
-    data <- data[,components_]
-    data_f <- data_f[,components_]
-    colnames(data) <- colnames(data_f) <- names(components_)
     data_plot <- data.frame(date = rep(time(data), ncol(data)),
                             y = c(data), 
                             label = factor(rep(colnames(data), 
-                                               each = nrow(data)), levels = colnames(data)))
-    data_f_plot <- data.frame(date = rep(time(data_f), ncol(data_f)),
-                              y = c(data_f), 
-                              label = factor(rep(colnames(data_f), 
-                                                 each = nrow(data_f)), levels = colnames(data_f)))
-    p <- ggplot2::ggplot(ggplot2::aes(x = date, y = y), 
+                                               each = nrow(data)),
+                                           levels = colnames(data)))
+    p <- ggplot2::ggplot(ggplot2::aes(x = date, y = y),
                          data = data_plot) + 
-        ggplot2::geom_line()
+         ggplot2::geom_line()
+
     if (forecast) {
-        p <- p + ggplot2::geom_line(data = data_f_plot,linetype = 2)
+      data_f <- ts.union(sapply(components_, extract_component, x13sa, forecast))
+      colnames(data_f) <- names(components_)
+      data_f_plot <- data.frame(date = rep(time(data_f), ncol(data_f)),
+                            y = c(data_f), 
+                            label = factor(rep(colnames(data_f), 
+                                               each = nrow(data_f)),
+                                           levels = colnames(data_f)))
+      p <- p + ggplot2::geom_line(data = data_f_plot,linetype = 2)
     }
-    p + ggplot2::facet_grid("label ~ .", scales = "free_y", 
-                            switch = "y") + 
+    
+    p + ggplot2::facet_grid("label ~ .", scales = "free_y", switch = "y") + 
         ggplot2::ylab(NULL)
 }
 utils::globalVariables(c("y"))
