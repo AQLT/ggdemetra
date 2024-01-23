@@ -7,3 +7,5 @@ inst/doc
 .Ruserdata
 .DS_Store
 TODO.R
+docs
+pkgdown
