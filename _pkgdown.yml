@@ -1,3 +1,6 @@
+url: https://aqlt.github.io/ggdemetra/
+template:
+  bootstrap: 5
 navbar:
   structure:
     left:
