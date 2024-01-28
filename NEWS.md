@@ -1,5 +1,9 @@
 # ggdemetra 0.2.7
 
+* correction in `siratio()` for TRAMO-SEATS models when no seasonal component is exported.
+
+# ggdemetra 0.2.7
+
 * deprecated function `y_forecast()` removed.
 
 * `calendar()`, `calendaradj()` and `autoplot()` correction with TRAMO-SEATS models.

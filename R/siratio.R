@@ -33,6 +33,16 @@ siratio.TRAMO_SEATS <- function(x, ...){
     i <- x$decomposition$components[, "i_cmp"]
     mode <- x$decomposition$mode
     
+    if (all(is.na(s))) {
+        if (mode == "Additive") {
+            s <- 0
+        } else {
+            s <- 1
+        }
+        s <- ts(s, start = start(i), 
+                end = end(i),
+                frequency = frequency(i))
+    }
     if (mode == "Additive") {
         si <- s + i
     } else {
@@ -50,6 +60,16 @@ siratio.jSA <- function(x, ...){
         # TRAMO-SEATS model
         res <- RJDemetra::get_indicators(x, c("decomposition.i_cmp", "decomposition.s_cmp"))
         mode <- RJDemetra::get_indicators(x, "mode")[[1]]
+        if (is.null(res[[2]])) {
+            if (mode == "Additive") {
+                s <- 0
+            } else {
+                s <- 1
+            }
+            res[[2]] <- ts(s, start = start(res[[1]]), 
+                    end = end(res[[1]]),
+                    frequency = frequency(res[[1]]))
+        }
         if (mode == "Additive"){
             res[[1]] <- res[[1]] + res[[2]]
         } else {
