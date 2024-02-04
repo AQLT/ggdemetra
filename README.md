@@ -19,10 +19,11 @@ ggdemetra is an extension of
 adjustment statistics to your plots. The seasonal adjustment process is
 done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an
 R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
-the seasonal adjustment software officially recommended to the members
-of the European Statistical System (ESS) and the European System of
-Central Banks. RJDemetra implements the two leading seasonal adjustment
-methods
+the seasonal adjustment software [officially
+recommended](https://wayback.archive-it.org/12090/20240102173448/https://cros-legacy.ec.europa.eu/system/files/Jdemetra_%20release.pdf)
+to the members of the European Statistical System (ESS) and the European
+System of Central Banks. RJDemetra implements the two leading seasonal
+adjustment methods
 [TRAMO/SEATS+](https://gretl.sourceforge.net/tramo/tramo-seats.html) and
 [X-12ARIMA/X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html).
 
