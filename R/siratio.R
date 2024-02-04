@@ -14,7 +14,7 @@
 #' x <- RJDemetra::x13(ipi_c_eu[,"FR"])
 #' siratioplot(x)
 #' ggsiratioplot(x)
-#' @importFrom stats cycle frequency
+#' @importFrom stats cycle frequency start end
 #' @importFrom graphics axis lines par plot.new plot.window points segments title
 #' @rdname siratio
 #' @export
