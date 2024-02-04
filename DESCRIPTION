@@ -21,7 +21,7 @@ Suggests:
     rmarkdown
 SystemRequirements: Java (>= 8)
 License: EUPL
-URL: https://github.com/AQLT/ggdemetra, https://aqlt.github.io/ggdemetra/
+URL: https://aqlt.github.io/ggdemetra/, https://github.com/AQLT/ggdemetra
 BugReports: https://github.com/AQLT/ggdemetra/issues
 Encoding: UTF-8
 LazyData: true
