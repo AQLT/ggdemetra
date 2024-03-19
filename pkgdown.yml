@@ -1,0 +1,10 @@
+pandoc: 3.1.11
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  ggdemetra: ggdemetra.html
+last_built: 2024-03-19T20:37Z
+urls:
+  reference: https://aqlt.github.io/ggdemetra/reference
+  article: https://aqlt.github.io/ggdemetra/articles
+
