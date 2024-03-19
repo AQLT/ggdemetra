@@ -1,3 +1,6 @@
+# ggdemetra 0.2.9
+
+
 # ggdemetra 0.2.8
 
 * correction in `siratio()` for TRAMO-SEATS models when no seasonal component is exported.
