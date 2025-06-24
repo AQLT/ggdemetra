@@ -4,13 +4,13 @@
 # ggdemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![R-CMD-check](https://github.com/AQLT/ggdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/AQLT/ggdemetra/actions)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN last
-release](http://www.r-pkg.org/badges/last-release/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+release](https://www.r-pkg.org/badges/last-release/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN monthly
-downloads](http://cranlogs.r-pkg.org/badges/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
+downloads](https://cranlogs.r-pkg.org/badges/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 
 ## Overview
 
