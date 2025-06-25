@@ -1,6 +1,6 @@
 # ggdemetra 0.2.9
 
-* `aes_` removed (deprecated functions)
+* `aes_()` removed (deprecated function) (issue #8).
 
 # ggdemetra 0.2.8
 
