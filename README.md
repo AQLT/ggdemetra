@@ -4,20 +4,20 @@
 # ggdemetra <img src="man/figures/logo.png" align="right" alt="" />
 
 [![R-CMD-check](https://github.com/AQLT/ggdemetra/workflows/R-CMD-check/badge.svg)](https://github.com/AQLT/ggdemetra/actions)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN last
-release](http://www.r-pkg.org/badges/last-release/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
+release](https://www.r-pkg.org/badges/last-release/ggdemetra)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN monthly
-downloads](http://cranlogs.r-pkg.org/badges/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
+downloads](https://cranlogs.r-pkg.org/badges/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 [![CRAN
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggdemetra?color=lightgrey)](https://cran.r-project.org/package=ggdemetra)
 
 ## Overview
 
 ggdemetra is an extension of
 [ggplot2](https://github.com/tidyverse/ggplot2) to add seasonal
 adjustment statistics to your plots. The seasonal adjustment process is
-done with [RJDemetra](https://github.com/jdemetra/rjdemetra) that is an
+done with [RJDemetra](https://github.com/rjdverse/rjdemetra) that is an
 R interface to [JDemetra+](https://github.com/jdemetra/jdemetra-app),
 the seasonal adjustment software [officially
 recommended](https://wayback.archive-it.org/12090/20240102173448/https://cros-legacy.ec.europa.eu/system/files/Jdemetra_%20release.pdf)
@@ -55,7 +55,7 @@ devtools::install_github("AQLT/ggdemetra")
 
 If you have troubles with the installation of RJDemetra, check the
 [installation
-manual](https://github.com/jdemetra/rjdemetra/wiki/Installation-manual).
+manual](https://github.com/rjdverse/rjdemetra/wiki/Installation-manual).
 
 ## Usage
 
